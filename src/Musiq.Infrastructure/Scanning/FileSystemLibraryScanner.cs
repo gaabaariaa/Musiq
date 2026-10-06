@@ -49,6 +49,16 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
 
         var existing = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var processed = 0;
+        var pending = new List<Musiq.Domain.Entities.Song>(capacity: 512);
+
+        async Task FlushAsync()
+        {
+            if (pending.Count == 0)
+                return;
+
+            await _songs.UpsertBatchAsync(pending, cancellationToken);
+            pending.Clear();
+        }
 
         foreach (var path in files)
         {
@@ -65,13 +75,16 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
                 existingSong.LastModifiedUtc != info.LastWriteTimeUtc)
             {
                 var song = await _metadataReader.ReadAsync(normalized, StableId(normalized), cancellationToken);
-                await _songs.UpsertAsync(song, cancellationToken);
+                pending.Add(song);
+                if (pending.Count >= 512)
+                    await FlushAsync();
             }
 
             processed++;
             progress?.Report(new LibraryScanProgress(files.Count, processed, normalized));
         }
 
+        await FlushAsync();
         var removed = await _songs.RemoveMissingFilesAsync(existing, fullRoot, cancellationToken);
 
         if (_scanLocations is not null)
