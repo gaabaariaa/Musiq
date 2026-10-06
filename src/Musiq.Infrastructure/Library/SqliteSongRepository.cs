@@ -301,9 +301,9 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
     {
         var terms = query
             .Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .Select(term => term.Replace(""", """"))
+            .Select(term => term.Replace("\"", "\"\""))
             .Where(term => term.Length > 0)
-            .Select(term => $""{term}"*");
+            .Select(term => $"\"{term}\"*");
 
         return string.Join(" AND ", terms);
     }
