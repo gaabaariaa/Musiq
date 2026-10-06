@@ -182,7 +182,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         delete.Transaction = (SqliteTransaction)transaction;
         delete.CommandText = """
             DELETE FROM Songs
-            WHERE Path LIKE $rootPrefix || '%'
+            WHERE substr(Path, 1, length($rootPrefix)) = $rootPrefix
               AND NOT EXISTS (
                   SELECT 1
                   FROM ExistingScanPaths p
