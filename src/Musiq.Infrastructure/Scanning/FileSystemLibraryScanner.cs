@@ -45,7 +45,6 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
             .Select(Path.GetFullPath)
             .ToList();
 
-        var existing = new HashSet<string>(files, StringComparer.OrdinalIgnoreCase);
         var states = await _songs.GetFileStatesAsync(files, cancellationToken);
         var processed = 0;
         var pending = new List<Musiq.Domain.Entities.Song>(capacity: 512);
@@ -81,7 +80,7 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
         }
 
         await FlushAsync();
-        var removed = await _songs.RemoveMissingFilesAsync(existing, fullRoot, cancellationToken);
+        var removed = await _songs.RemoveMissingFilesAsync(files, fullRoot, cancellationToken);
 
         if (_scanLocations is not null)
         {
