@@ -94,6 +94,51 @@ public sealed class LibraryDatabaseTests
     }
 
     [Fact]
+    public async Task Library_query_supports_paging_and_full_text_search()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "MusiqTests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+
+        try
+        {
+            var database = new LibraryDatabase(Path.Combine(root, "library.db"));
+            await database.InitializeAsync();
+
+            var repository = new SqliteSongRepository(database);
+            await repository.UpsertBatchAsync(new[]
+            {
+                new Song(1, Path.Combine(root, "one.mp3"), "First Light", "Artist One", "Album", TimeSpan.FromMinutes(3)),
+                new Song(2, Path.Combine(root, "two.mp3"), "Night Drive", "Artist Two", "Album", TimeSpan.FromMinutes(3)),
+                new Song(3, Path.Combine(root, "three.mp3"), "Light Years", "Artist Three", "Album", TimeSpan.FromMinutes(3))
+            });
+
+            var page = await repository.GetPageAsync(2, 1);
+            var pagedSong = Assert.Single(page);
+            Assert.Equal(2, pagedSong.Id);
+
+            var search = await repository.SearchAsync("light", 1, 10);
+            Assert.Equal(2, search.Count);
+            Assert.Equal(new[] { 1L, 3L }, search.Select(song => song.Id).OrderBy(id => id));
+
+            await repository.UpsertAsync(new Song(
+                1,
+                Path.Combine(root, "one.mp3"),
+                "First Light Remastered",
+                "Artist One",
+                "Album",
+                TimeSpan.FromMinutes(3)));
+
+            search = await repository.SearchAsync("remastered", 1, 10);
+            Assert.Single(search);
+            Assert.Equal(1, search[0].Id);
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+        }
+    }
+
+    [Fact]
     public async Task Remove_missing_files_only_removes_files_under_scan_root()
     {
         var root = Path.Combine(Path.GetTempPath(), "MusiqTests", Guid.NewGuid().ToString("N"));
