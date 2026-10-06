@@ -149,22 +149,51 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         await transaction.CommitAsync(cancellationToken);
     }
 
-    public async Task<int> RemoveMissingFilesAsync(IReadOnlySet<string> existingPaths, string rootPath, CancellationToken cancellationToken = default)
+    public async Task<int> RemoveMissingFilesAsync(
+        IReadOnlySet<string> existingPaths,
+        string rootPath,
+        CancellationToken cancellationToken = default)
     {
-        await using var connection = await _database.OpenConnectionAsync(cancellationToken);
-        await using var command = connection.CreateCommand();
-
         var prefix = Path.GetFullPath(rootPath);
-        if (!prefix.EndsWith(Path.DirectorySeparatorChar)) prefix += Path.DirectorySeparatorChar;
+        if (!prefix.EndsWith(Path.DirectorySeparatorChar))
+            prefix += Path.DirectorySeparatorChar;
 
-        command.CommandText = """
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken);
+        await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
+
+        await using var create = connection.CreateCommand();
+        create.Transaction = (SqliteTransaction)transaction;
+        create.CommandText = "CREATE TEMP TABLE ExistingScanPaths (Path TEXT PRIMARY KEY COLLATE NOCASE);";
+        await create.ExecuteNonQueryAsync(cancellationToken);
+
+        await using var insert = connection.CreateCommand();
+        insert.Transaction = (SqliteTransaction)transaction;
+        insert.CommandText = "INSERT OR IGNORE INTO ExistingScanPaths(Path) VALUES ($path);";
+        var pathParameter = insert.Parameters.Add("$path", SqliteType.Text);
+
+        foreach (var path in existingPaths)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            pathParameter.Value = Path.GetFullPath(path);
+            await insert.ExecuteNonQueryAsync(cancellationToken);
+        }
+
+        await using var delete = connection.CreateCommand();
+        delete.Transaction = (SqliteTransaction)transaction;
+        delete.CommandText = """
             DELETE FROM Songs
             WHERE Path LIKE $rootPrefix || '%'
-              AND Path NOT IN (SELECT value FROM json_each($paths));
+              AND NOT EXISTS (
+                  SELECT 1
+                  FROM ExistingScanPaths p
+                  WHERE p.Path = Songs.Path
+              );
             """;
-        command.Parameters.AddWithValue("$rootPrefix", prefix);
-        command.Parameters.AddWithValue("$paths", System.Text.Json.JsonSerializer.Serialize(existingPaths));
-        return await command.ExecuteNonQueryAsync(cancellationToken);
+        delete.Parameters.AddWithValue("$rootPrefix", prefix);
+
+        var removed = await delete.ExecuteNonQueryAsync(cancellationToken);
+        await transaction.CommitAsync(cancellationToken);
+        return removed;
     }
 
     public async Task<IReadOnlyList<Song>> GetRecentlyAddedAsync(int limit, CancellationToken cancellationToken = default)
