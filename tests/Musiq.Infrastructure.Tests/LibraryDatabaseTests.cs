@@ -119,7 +119,7 @@ public sealed class LibraryDatabaseTests
             });
 
             var removed = await repository.RemoveMissingFilesAsync(
-                new HashSet<string>(StringComparer.OrdinalIgnoreCase) { keptPath },
+                new[] { keptPath },
                 root);
 
             Assert.Equal(1, removed);
