@@ -27,6 +27,7 @@ public partial class App : System.Windows.Application
         services.AddSingleton<ILibraryQuery>(sp => sp.GetRequiredService<SqliteSongRepository>());
         services.AddSingleton<IAudioFileMetadataReader, BasicAudioFileMetadataReader>();
         services.AddSingleton<ILibraryScanner, FileSystemLibraryScanner>();
+        services.AddSingleton<ILibraryChangeMonitor, FileSystemLibraryChangeMonitor>();
 
         _services = services.BuildServiceProvider();
 
