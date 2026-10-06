@@ -196,6 +196,62 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         return removed;
     }
 
+    public async Task<IReadOnlyList<Song>> GetPageAsync(
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default)
+    {
+        ValidatePage(page, pageSize);
+
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = """
+            SELECT Id, Path, Title, Artist, Album, AlbumArtist, Genre, Year,
+                   TrackNumber, DiscNumber, Composer, Comment, Lyrics,
+                   DurationTicks, FileSize, LastModifiedUtc
+            FROM Songs
+            ORDER BY Id
+            LIMIT $pageSize OFFSET $offset;
+            """;
+        command.Parameters.AddWithValue("$pageSize", pageSize);
+        command.Parameters.AddWithValue("$offset", checked((page - 1) * pageSize));
+
+        return await ReadSongsAsync(command, cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<Song>> SearchAsync(
+        string query,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default)
+    {
+        ValidatePage(page, pageSize);
+        if (string.IsNullOrWhiteSpace(query))
+            return await GetPageAsync(page, pageSize, cancellationToken);
+
+        var matchQuery = BuildFtsQuery(query);
+        if (matchQuery.Length == 0)
+            return Array.Empty<Song>();
+
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = """
+            SELECT s.Id, s.Path, s.Title, s.Artist, s.Album, s.AlbumArtist, s.Genre, s.Year,
+                   s.TrackNumber, s.DiscNumber, s.Composer, s.Comment, s.Lyrics,
+                   s.DurationTicks, s.FileSize, s.LastModifiedUtc
+            FROM SongsSearch search
+            INNER JOIN Songs s ON s.Id = search.rowid
+            WHERE SongsSearch MATCH $query
+            ORDER BY bm25(SongsSearch), s.Id
+            LIMIT $pageSize OFFSET $offset;
+            """;
+        command.Parameters.AddWithValue("$query", matchQuery);
+        command.Parameters.AddWithValue("$pageSize", pageSize);
+        command.Parameters.AddWithValue("$offset", checked((page - 1) * pageSize));
+
+        return await ReadSongsAsync(command, cancellationToken);
+    }
+
     public async Task<IReadOnlyList<Song>> GetRecentlyAddedAsync(int limit, CancellationToken cancellationToken = default)
     {
         if (limit <= 0) return Array.Empty<Song>();
@@ -233,4 +289,55 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
 
         return songs;
     }
+    private static void ValidatePage(int page, int pageSize)
+    {
+        if (page < 1)
+            throw new ArgumentOutOfRangeException(nameof(page));
+        if (pageSize is < 1 or > 500)
+            throw new ArgumentOutOfRangeException(nameof(pageSize));
+    }
+
+    private static string BuildFtsQuery(string query)
+    {
+        var terms = query
+            .Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(term => term.Replace(""", """"))
+            .Where(term => term.Length > 0)
+            .Select(term => $""{term}"*");
+
+        return string.Join(" AND ", terms);
+    }
+
+    private static async Task<IReadOnlyList<Song>> ReadSongsAsync(
+        SqliteCommand command,
+        CancellationToken cancellationToken)
+    {
+        var songs = new List<Song>();
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        while (await reader.ReadAsync(cancellationToken))
+        {
+            songs.Add(new Song(
+                reader.GetInt64(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.GetString(3),
+                reader.GetString(4),
+                TimeSpan.FromTicks(reader.GetInt64(13)))
+            {
+                AlbumArtist = reader.GetString(5),
+                Genre = reader.GetString(6),
+                Year = reader.IsDBNull(7) ? null : reader.GetInt32(7),
+                TrackNumber = reader.IsDBNull(8) ? null : reader.GetInt32(8),
+                DiscNumber = reader.IsDBNull(9) ? null : reader.GetInt32(9),
+                Composer = reader.GetString(10),
+                Comment = reader.GetString(11),
+                Lyrics = reader.GetString(12),
+                FileSize = reader.GetInt64(14),
+                LastModifiedUtc = DateTimeOffset.Parse(reader.GetString(15))
+            });
+        }
+
+        return songs;
+    }
+
 }
