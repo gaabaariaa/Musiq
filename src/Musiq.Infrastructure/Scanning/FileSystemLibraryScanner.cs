@@ -12,11 +12,16 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
 
     private readonly ISongRepository _songs;
     private readonly IAudioFileMetadataReader _metadataReader;
+    private readonly IScanLocationRepository? _scanLocations;
 
-    public FileSystemLibraryScanner(ISongRepository songs, IAudioFileMetadataReader metadataReader)
+    public FileSystemLibraryScanner(
+        ISongRepository songs,
+        IAudioFileMetadataReader metadataReader,
+        IScanLocationRepository? scanLocations = null)
     {
         _songs = songs;
         _metadataReader = metadataReader;
+        _scanLocations = scanLocations;
     }
 
     public async Task<LibraryScanResult> ScanAsync(
@@ -68,6 +73,16 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
         }
 
         var removed = await _songs.RemoveMissingFilesAsync(existing, fullRoot, cancellationToken);
+
+        if (_scanLocations is not null)
+        {
+            var locations = await _scanLocations.GetAllAsync(cancellationToken);
+            var location = locations.FirstOrDefault(x =>
+                string.Equals(x.Path, fullRoot, StringComparison.OrdinalIgnoreCase));
+
+            if (location is not null)
+                await _scanLocations.MarkScannedAsync(location.Id, DateTimeOffset.UtcNow, cancellationToken);
+        }
 
         return new LibraryScanResult(
             fullRoot,
