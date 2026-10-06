@@ -3,7 +3,7 @@ using Musiq.Application.Abstractions;
 
 namespace Musiq.Infrastructure.Scanning;
 
-public sealed class FileSystemLibraryChangeMonitor : ILibraryChangeMonitor
+public sealed class FileSystemLibraryChangeMonitor : ILibraryChangeMonitor, IDisposable
 {
     private static readonly HashSet<string> SupportedExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -60,12 +60,17 @@ public sealed class FileSystemLibraryChangeMonitor : ILibraryChangeMonitor
             ChangesDetected?.Invoke(this, new LibraryChangeDetectedEventArgs(rootPath, paths));
     }
 
-    public ValueTask DisposeAsync()
+    public void Dispose()
     {
         foreach (var pair in _states)
             pair.Value.Dispose();
 
         _states.Clear();
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        Dispose();
         return ValueTask.CompletedTask;
     }
 
