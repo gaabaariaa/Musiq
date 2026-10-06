@@ -1,4 +1,5 @@
 using Musiq.Domain.Entities;
+using Xunit;
 
 namespace Musiq.Domain.Tests;
 
