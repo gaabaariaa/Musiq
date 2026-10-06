@@ -12,20 +12,69 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
 
     public async Task<Song?> GetByPathAsync(string path, CancellationToken cancellationToken = default)
     {
+        var normalized = Path.GetFullPath(path);
         await using var connection = await _database.OpenConnectionAsync(cancellationToken);
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT Id, Title, Artist, Album, DurationTicks, FileSize, LastModifiedUtc FROM Songs WHERE Path = $path LIMIT 1;";
-        command.Parameters.AddWithValue("$path", Path.GetFullPath(path));
+        command.Parameters.AddWithValue("$path", normalized);
 
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
-        if (!await reader.ReadAsync(cancellationToken))
-            return null;
+        if (!await reader.ReadAsync(cancellationToken)) return null;
 
-        return new Song(reader.GetInt64(0), Path.GetFullPath(path), reader.GetString(1), reader.GetString(2), reader.GetString(3), TimeSpan.FromTicks(reader.GetInt64(4)))
+        return new Song(reader.GetInt64(0), normalized, reader.GetString(1), reader.GetString(2), reader.GetString(3), TimeSpan.FromTicks(reader.GetInt64(4)))
         {
             FileSize = reader.GetInt64(5),
             LastModifiedUtc = DateTimeOffset.Parse(reader.GetString(6))
         };
+    }
+
+    public async Task<IReadOnlyDictionary<string, SongFileState>> GetFileStatesAsync(
+        IReadOnlyList<string> paths,
+        CancellationToken cancellationToken = default)
+    {
+        if (paths.Count == 0)
+            return new Dictionary<string, SongFileState>(StringComparer.OrdinalIgnoreCase);
+
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken);
+        await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
+        await using var create = connection.CreateCommand();
+        create.Transaction = (SqliteTransaction)transaction;
+        create.CommandText = "CREATE TEMP TABLE ScanPaths (Path TEXT PRIMARY KEY COLLATE NOCASE);";
+        await create.ExecuteNonQueryAsync(cancellationToken);
+
+        await using var insert = connection.CreateCommand();
+        insert.Transaction = (SqliteTransaction)transaction;
+        insert.CommandText = "INSERT OR IGNORE INTO ScanPaths(Path) VALUES ($path);";
+        var parameter = insert.Parameters.Add("$path", SqliteType.Text);
+
+        foreach (var path in paths)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            parameter.Value = Path.GetFullPath(path);
+            await insert.ExecuteNonQueryAsync(cancellationToken);
+        }
+
+        await using var query = connection.CreateCommand();
+        query.Transaction = (SqliteTransaction)transaction;
+        query.CommandText = """
+            SELECT s.Path, s.FileSize, s.LastModifiedUtc
+            FROM Songs s
+            INNER JOIN ScanPaths p ON p.Path = s.Path;
+            """;
+
+        var states = new Dictionary<string, SongFileState>(StringComparer.OrdinalIgnoreCase);
+        await using var reader = await query.ExecuteReaderAsync(cancellationToken);
+        while (await reader.ReadAsync(cancellationToken))
+        {
+            var path = reader.GetString(0);
+            states[path] = new SongFileState(
+                path,
+                reader.GetInt64(1),
+                DateTimeOffset.Parse(reader.GetString(2)));
+        }
+
+        await transaction.CommitAsync(cancellationToken);
+        return states;
     }
 
     public async Task UpsertAsync(Song song, CancellationToken cancellationToken = default)
