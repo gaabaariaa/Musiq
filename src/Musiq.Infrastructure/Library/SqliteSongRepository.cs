@@ -13,6 +13,30 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         _database = database;
     }
 
+    public async Task<Song?> GetByPathAsync(string path, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT Id, Title, Artist, Album, DurationTicks, FileSize, LastModifiedUtc FROM Songs WHERE Path = $path LIMIT 1;";
+        command.Parameters.AddWithValue("$path", Path.GetFullPath(path));
+
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        if (!await reader.ReadAsync(cancellationToken))
+            return null;
+
+        return new Song(
+            reader.GetInt64(0),
+            Path.GetFullPath(path),
+            reader.GetString(1),
+            reader.GetString(2),
+            reader.GetString(3),
+            TimeSpan.FromTicks(reader.GetInt64(4)))
+        {
+            FileSize = reader.GetInt64(5),
+            LastModifiedUtc = DateTimeOffset.Parse(reader.GetString(6))
+        };
+    }
+
     public async Task UpsertAsync(Song song, CancellationToken cancellationToken = default)
     {
         await using var connection = await _database.OpenConnectionAsync(cancellationToken);
@@ -60,7 +84,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
-    public async Task RemoveMissingFilesAsync(IReadOnlySet<string> existingPaths, string rootPath, CancellationToken cancellationToken = default)
+    public async Task<int> RemoveMissingFilesAsync(IReadOnlySet<string> existingPaths, string rootPath, CancellationToken cancellationToken = default)
     {
         await using var connection = await _database.OpenConnectionAsync(cancellationToken);
         await using var command = connection.CreateCommand();
@@ -76,7 +100,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
             """;
         command.Parameters.AddWithValue("$rootPrefix", prefix);
         command.Parameters.AddWithValue("$paths", System.Text.Json.JsonSerializer.Serialize(existingPaths));
-        await command.ExecuteNonQueryAsync(cancellationToken);
+        return await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
     public async Task<IReadOnlyList<Song>> GetRecentlyAddedAsync(int limit, CancellationToken cancellationToken = default)
