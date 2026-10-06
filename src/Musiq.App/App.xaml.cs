@@ -13,7 +13,7 @@ public partial class App : System.Windows.Application
 {
     private ServiceProvider? _services;
 
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
 
@@ -26,27 +26,26 @@ public partial class App : System.Windows.Application
         services.AddSingleton<SqliteSongRepository>();
         services.AddSingleton<ISongRepository>(sp => sp.GetRequiredService<SqliteSongRepository>());
         services.AddSingleton<ILibraryQuery>(sp => sp.GetRequiredService<SqliteSongRepository>());
+        services.AddSingleton<SqliteScanLocationRepository>();
+        services.AddSingleton<IScanLocationRepository>(sp => sp.GetRequiredService<SqliteScanLocationRepository>());
         services.AddSingleton<IAudioFileMetadataReader, BasicAudioFileMetadataReader>();
         services.AddSingleton<ILibraryScanner, FileSystemLibraryScanner>();
         services.AddSingleton<ILibraryChangeMonitor, FileSystemLibraryChangeMonitor>();
 
         _services = services.BuildServiceProvider();
 
-        InitializeDatabaseAsync().ConfigureAwait(false);
-        MainWindow = new MainWindow();
-        MainWindow.Show();
-    }
-
-    private async Task InitializeDatabaseAsync()
-    {
         try
         {
-            await _services!.GetRequiredService<LibraryDatabase>().InitializeAsync();
+            await _services.GetRequiredService<LibraryDatabase>().InitializeAsync();
         }
         catch (Exception)
         {
             Shutdown(-1);
+            return;
         }
+
+        MainWindow = new MainWindow();
+        MainWindow.Show();
     }
 
     protected override void OnExit(ExitEventArgs e)
