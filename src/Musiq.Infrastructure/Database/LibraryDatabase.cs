@@ -57,6 +57,49 @@ public sealed class LibraryDatabase
             CREATE INDEX IF NOT EXISTS IX_Songs_Album ON Songs(Album);
             CREATE INDEX IF NOT EXISTS IX_Songs_LastModifiedUtc ON Songs(LastModifiedUtc);
 
+            CREATE VIRTUAL TABLE IF NOT EXISTS SongsSearch USING fts5(
+                Title,
+                Artist,
+                Album,
+                AlbumArtist,
+                Genre,
+                Composer,
+                Comment,
+                Lyrics
+            );
+
+            CREATE TRIGGER IF NOT EXISTS TR_SongsSearch_Insert
+            AFTER INSERT ON Songs
+            BEGIN
+                INSERT INTO SongsSearch(rowid, Title, Artist, Album, AlbumArtist, Genre, Composer, Comment, Lyrics)
+                VALUES (
+                    new.Id, new.Title, new.Artist, new.Album, new.AlbumArtist,
+                    new.Genre, new.Composer, new.Comment, new.Lyrics
+                );
+            END;
+
+            CREATE TRIGGER IF NOT EXISTS TR_SongsSearch_Update
+            AFTER UPDATE ON Songs
+            BEGIN
+                DELETE FROM SongsSearch WHERE rowid = old.Id;
+                INSERT INTO SongsSearch(rowid, Title, Artist, Album, AlbumArtist, Genre, Composer, Comment, Lyrics)
+                VALUES (
+                    new.Id, new.Title, new.Artist, new.Album, new.AlbumArtist,
+                    new.Genre, new.Composer, new.Comment, new.Lyrics
+                );
+            END;
+
+            CREATE TRIGGER IF NOT EXISTS TR_SongsSearch_Delete
+            AFTER DELETE ON Songs
+            BEGIN
+                DELETE FROM SongsSearch WHERE rowid = old.Id;
+            END;
+
+            INSERT OR REPLACE INTO SongsSearch(rowid, Title, Artist, Album, AlbumArtist, Genre, Composer, Comment, Lyrics)
+            SELECT Id, Title, Artist, Album, AlbumArtist, Genre, Composer, Comment, Lyrics
+            FROM Songs
+            WHERE Id NOT IN (SELECT rowid FROM SongsSearch);
+
             CREATE TABLE IF NOT EXISTS ScanLocations (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Path TEXT NOT NULL UNIQUE COLLATE NOCASE,
