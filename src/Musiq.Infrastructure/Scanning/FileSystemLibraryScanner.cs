@@ -52,20 +52,28 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
             var normalized = Path.GetFullPath(path);
             existing.Add(normalized);
 
-            var song = await _metadataReader.ReadAsync(normalized, StableId(normalized), cancellationToken);
-            await _songs.UpsertAsync(song, cancellationToken);
+            var info = new FileInfo(normalized);
+            var existingSong = await _songs.GetByPathAsync(normalized, cancellationToken);
+
+            if (existingSong is null ||
+                existingSong.FileSize != info.Length ||
+                existingSong.LastModifiedUtc != info.LastWriteTimeUtc)
+            {
+                var song = await _metadataReader.ReadAsync(normalized, StableId(normalized), cancellationToken);
+                await _songs.UpsertAsync(song, cancellationToken);
+            }
 
             processed++;
             progress?.Report(new LibraryScanProgress(files.Count, processed, normalized));
         }
 
-        await _songs.RemoveMissingFilesAsync(existing, fullRoot, cancellationToken);
+        var removed = await _songs.RemoveMissingFilesAsync(existing, fullRoot, cancellationToken);
 
         return new LibraryScanResult(
             fullRoot,
             files.Count,
             processed,
-            0,
+            removed,
             Stopwatch.GetElapsedTime(started));
     }
 
