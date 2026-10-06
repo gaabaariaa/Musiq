@@ -37,10 +37,15 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         };
     }
 
-    public async Task UpsertAsync(Song song, CancellationToken cancellationToken = default)
+    public async Task UpsertBatchAsync(IReadOnlyList<Song> songs, CancellationToken cancellationToken = default)
     {
+        if (songs.Count == 0)
+            return;
+
         await using var connection = await _database.OpenConnectionAsync(cancellationToken);
+        await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
         await using var command = connection.CreateCommand();
+        command.Transaction = (SqliteTransaction)transaction;
         command.CommandText = """
             INSERT INTO Songs
             (Id, Path, Title, Artist, Album, AlbumArtist, Genre, Year, TrackNumber, DiscNumber,
@@ -49,39 +54,57 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
             ($id, $path, $title, $artist, $album, $albumArtist, $genre, $year, $trackNumber, $discNumber,
              $composer, $comment, $lyrics, $durationTicks, $fileSize, $lastModifiedUtc)
             ON CONFLICT(Path) DO UPDATE SET
-                Title = excluded.Title,
-                Artist = excluded.Artist,
-                Album = excluded.Album,
-                AlbumArtist = excluded.AlbumArtist,
-                Genre = excluded.Genre,
-                Year = excluded.Year,
-                TrackNumber = excluded.TrackNumber,
-                DiscNumber = excluded.DiscNumber,
-                Composer = excluded.Composer,
-                Comment = excluded.Comment,
-                Lyrics = excluded.Lyrics,
-                DurationTicks = excluded.DurationTicks,
-                FileSize = excluded.FileSize,
+                Title = excluded.Title, Artist = excluded.Artist, Album = excluded.Album,
+                AlbumArtist = excluded.AlbumArtist, Genre = excluded.Genre, Year = excluded.Year,
+                TrackNumber = excluded.TrackNumber, DiscNumber = excluded.DiscNumber,
+                Composer = excluded.Composer, Comment = excluded.Comment, Lyrics = excluded.Lyrics,
+                DurationTicks = excluded.DurationTicks, FileSize = excluded.FileSize,
                 LastModifiedUtc = excluded.LastModifiedUtc;
             """;
 
-        command.Parameters.AddWithValue("$id", song.Id);
-        command.Parameters.AddWithValue("$path", song.Path);
-        command.Parameters.AddWithValue("$title", song.Title);
-        command.Parameters.AddWithValue("$artist", song.Artist);
-        command.Parameters.AddWithValue("$album", song.Album);
-        command.Parameters.AddWithValue("$albumArtist", song.AlbumArtist);
-        command.Parameters.AddWithValue("$genre", song.Genre);
-        command.Parameters.AddWithValue("$year", (object?)song.Year ?? DBNull.Value);
-        command.Parameters.AddWithValue("$trackNumber", (object?)song.TrackNumber ?? DBNull.Value);
-        command.Parameters.AddWithValue("$discNumber", (object?)song.DiscNumber ?? DBNull.Value);
-        command.Parameters.AddWithValue("$composer", song.Composer);
-        command.Parameters.AddWithValue("$comment", song.Comment);
-        command.Parameters.AddWithValue("$lyrics", song.Lyrics);
-        command.Parameters.AddWithValue("$durationTicks", song.Duration.Ticks);
-        command.Parameters.AddWithValue("$fileSize", song.FileSize);
-        command.Parameters.AddWithValue("$lastModifiedUtc", song.LastModifiedUtc.UtcDateTime.ToString("O"));
-        await command.ExecuteNonQueryAsync(cancellationToken);
+        var p = new Dictionary<string, SqliteParameter>
+        {
+            ["$id"] = command.Parameters.Add("$id", SqliteType.Integer),
+            ["$path"] = command.Parameters.Add("$path", SqliteType.Text),
+            ["$title"] = command.Parameters.Add("$title", SqliteType.Text),
+            ["$artist"] = command.Parameters.Add("$artist", SqliteType.Text),
+            ["$album"] = command.Parameters.Add("$album", SqliteType.Text),
+            ["$albumArtist"] = command.Parameters.Add("$albumArtist", SqliteType.Text),
+            ["$genre"] = command.Parameters.Add("$genre", SqliteType.Text),
+            ["$year"] = command.Parameters.Add("$year", SqliteType.Integer),
+            ["$trackNumber"] = command.Parameters.Add("$trackNumber", SqliteType.Integer),
+            ["$discNumber"] = command.Parameters.Add("$discNumber", SqliteType.Integer),
+            ["$composer"] = command.Parameters.Add("$composer", SqliteType.Text),
+            ["$comment"] = command.Parameters.Add("$comment", SqliteType.Text),
+            ["$lyrics"] = command.Parameters.Add("$lyrics", SqliteType.Text),
+            ["$durationTicks"] = command.Parameters.Add("$durationTicks", SqliteType.Integer),
+            ["$fileSize"] = command.Parameters.Add("$fileSize", SqliteType.Integer),
+            ["$lastModifiedUtc"] = command.Parameters.Add("$lastModifiedUtc", SqliteType.Text)
+        };
+
+        foreach (var song in songs)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            p["$id"].Value = song.Id;
+            p["$path"].Value = song.Path;
+            p["$title"].Value = song.Title;
+            p["$artist"].Value = song.Artist;
+            p["$album"].Value = song.Album;
+            p["$albumArtist"].Value = song.AlbumArtist;
+            p["$genre"].Value = song.Genre;
+            p["$year"].Value = (object?)song.Year ?? DBNull.Value;
+            p["$trackNumber"].Value = (object?)song.TrackNumber ?? DBNull.Value;
+            p["$discNumber"].Value = (object?)song.DiscNumber ?? DBNull.Value;
+            p["$composer"].Value = song.Composer;
+            p["$comment"].Value = song.Comment;
+            p["$lyrics"].Value = song.Lyrics;
+            p["$durationTicks"].Value = song.Duration.Ticks;
+            p["$fileSize"].Value = song.FileSize;
+            p["$lastModifiedUtc"].Value = song.LastModifiedUtc.UtcDateTime.ToString("O");
+            await command.ExecuteNonQueryAsync(cancellationToken);
+        }
+
+        await transaction.CommitAsync(cancellationToken);
     }
 
     public async Task<int> RemoveMissingFilesAsync(IReadOnlySet<string> existingPaths, string rootPath, CancellationToken cancellationToken = default)
