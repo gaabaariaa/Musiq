@@ -1,0 +1,19 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, musiq-foundation ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet restore Musiq.sln
+      - run: dotnet build Musiq.sln --configuration Release --no-restore
+      - run: dotnet test Musiq.sln --configuration Release --no-build
