@@ -14,10 +14,7 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
     private readonly IAudioFileMetadataReader _metadataReader;
     private readonly IScanLocationRepository? _scanLocations;
 
-    public FileSystemLibraryScanner(
-        ISongRepository songs,
-        IAudioFileMetadataReader metadataReader,
-        IScanLocationRepository? scanLocations = null)
+    public FileSystemLibraryScanner(ISongRepository songs, IAudioFileMetadataReader metadataReader, IScanLocationRepository? scanLocations = null)
     {
         _songs = songs;
         _metadataReader = metadataReader;
@@ -45,9 +42,11 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
                     ReturnSpecialDirectories = false
                 })
             .Where(path => SupportedExtensions.Contains(Path.GetExtension(path)))
+            .Select(Path.GetFullPath)
             .ToList();
 
-        var existing = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var existing = new HashSet<string>(files, StringComparer.OrdinalIgnoreCase);
+        var states = await _songs.GetFileStatesAsync(files, cancellationToken);
         var processed = 0;
         var pending = new List<Musiq.Domain.Entities.Song>(capacity: 512);
 
@@ -60,19 +59,16 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
             pending.Clear();
         }
 
-        foreach (var path in files)
+        foreach (var normalized in files)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var normalized = Path.GetFullPath(path);
-            existing.Add(normalized);
-
             var info = new FileInfo(normalized);
-            var existingSong = await _songs.GetByPathAsync(normalized, cancellationToken);
+            var changed = !states.TryGetValue(normalized, out var state) ||
+                          state.FileSize != info.Length ||
+                          state.LastModifiedUtc != info.LastWriteTimeUtc;
 
-            if (existingSong is null ||
-                existingSong.FileSize != info.Length ||
-                existingSong.LastModifiedUtc != info.LastWriteTimeUtc)
+            if (changed)
             {
                 var song = await _metadataReader.ReadAsync(normalized, StableId(normalized), cancellationToken);
                 pending.Add(song);
@@ -97,12 +93,7 @@ public sealed class FileSystemLibraryScanner : ILibraryScanner
                 await _scanLocations.MarkScannedAsync(location.Id, DateTimeOffset.UtcNow, cancellationToken);
         }
 
-        return new LibraryScanResult(
-            fullRoot,
-            files.Count,
-            processed,
-            removed,
-            Stopwatch.GetElapsedTime(started));
+        return new LibraryScanResult(fullRoot, files.Count, processed, removed, Stopwatch.GetElapsedTime(started));
     }
 
     private static long StableId(string path)
