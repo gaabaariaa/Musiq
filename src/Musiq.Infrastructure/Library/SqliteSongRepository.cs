@@ -8,10 +8,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
 {
     private readonly Database.LibraryDatabase _database;
 
-    public SqliteSongRepository(Database.LibraryDatabase database)
-    {
-        _database = database;
-    }
+    public SqliteSongRepository(Database.LibraryDatabase database) => _database = database;
 
     public async Task<Song?> GetByPathAsync(string path, CancellationToken cancellationToken = default)
     {
@@ -24,23 +21,19 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         if (!await reader.ReadAsync(cancellationToken))
             return null;
 
-        return new Song(
-            reader.GetInt64(0),
-            Path.GetFullPath(path),
-            reader.GetString(1),
-            reader.GetString(2),
-            reader.GetString(3),
-            TimeSpan.FromTicks(reader.GetInt64(4)))
+        return new Song(reader.GetInt64(0), Path.GetFullPath(path), reader.GetString(1), reader.GetString(2), reader.GetString(3), TimeSpan.FromTicks(reader.GetInt64(4)))
         {
             FileSize = reader.GetInt64(5),
             LastModifiedUtc = DateTimeOffset.Parse(reader.GetString(6))
         };
     }
 
+    public async Task UpsertAsync(Song song, CancellationToken cancellationToken = default)
+        => await UpsertBatchAsync(new[] { song }, cancellationToken);
+
     public async Task UpsertBatchAsync(IReadOnlyList<Song> songs, CancellationToken cancellationToken = default)
     {
-        if (songs.Count == 0)
-            return;
+        if (songs.Count == 0) return;
 
         await using var connection = await _database.OpenConnectionAsync(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
@@ -113,8 +106,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         await using var command = connection.CreateCommand();
 
         var prefix = Path.GetFullPath(rootPath);
-        if (!prefix.EndsWith(Path.DirectorySeparatorChar))
-            prefix += Path.DirectorySeparatorChar;
+        if (!prefix.EndsWith(Path.DirectorySeparatorChar)) prefix += Path.DirectorySeparatorChar;
 
         command.CommandText = """
             DELETE FROM Songs
@@ -128,8 +120,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
 
     public async Task<IReadOnlyList<Song>> GetRecentlyAddedAsync(int limit, CancellationToken cancellationToken = default)
     {
-        if (limit <= 0)
-            return Array.Empty<Song>();
+        if (limit <= 0) return Array.Empty<Song>();
 
         await using var connection = await _database.OpenConnectionAsync(cancellationToken);
         await using var command = connection.CreateCommand();
@@ -147,13 +138,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
         while (await reader.ReadAsync(cancellationToken))
         {
-            songs.Add(new Song(
-                reader.GetInt64(0),
-                reader.GetString(1),
-                reader.GetString(2),
-                reader.GetString(3),
-                reader.GetString(4),
-                TimeSpan.FromTicks(reader.GetInt64(13)))
+            songs.Add(new Song(reader.GetInt64(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), TimeSpan.FromTicks(reader.GetInt64(13)))
             {
                 AlbumArtist = reader.GetString(5),
                 Genre = reader.GetString(6),
