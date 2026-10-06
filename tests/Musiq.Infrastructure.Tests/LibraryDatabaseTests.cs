@@ -92,4 +92,45 @@ public sealed class LibraryDatabaseTests
             Directory.Delete(root, recursive: true);
         }
     }
+
+    [Fact]
+    public async Task Remove_missing_files_only_removes_files_under_scan_root()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "MusiqTests", Guid.NewGuid().ToString("N"));
+        var otherRoot = Path.Combine(Path.GetTempPath(), "MusiqTests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        Directory.CreateDirectory(otherRoot);
+
+        try
+        {
+            var database = new LibraryDatabase(Path.Combine(root, "library.db"));
+            await database.InitializeAsync();
+
+            var repository = new SqliteSongRepository(database);
+            var keptPath = Path.Combine(root, "Kept.mp3");
+            var removedPath = Path.Combine(root, "Removed.mp3");
+            var outsidePath = Path.Combine(otherRoot, "Outside.mp3");
+
+            await repository.UpsertBatchAsync(new[]
+            {
+                new Song(1, keptPath, "Kept", "Artist", "Album", TimeSpan.FromMinutes(3)),
+                new Song(2, removedPath, "Removed", "Artist", "Album", TimeSpan.FromMinutes(3)),
+                new Song(3, outsidePath, "Outside", "Artist", "Album", TimeSpan.FromMinutes(3))
+            });
+
+            var removed = await repository.RemoveMissingFilesAsync(
+                new HashSet<string>(StringComparer.OrdinalIgnoreCase) { keptPath },
+                root);
+
+            Assert.Equal(1, removed);
+            Assert.NotNull(await repository.GetByPathAsync(keptPath));
+            Assert.Null(await repository.GetByPathAsync(removedPath));
+            Assert.NotNull(await repository.GetByPathAsync(outsidePath));
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+            Directory.Delete(otherRoot, recursive: true);
+        }
+    }
 }
