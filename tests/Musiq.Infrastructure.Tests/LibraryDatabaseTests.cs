@@ -107,7 +107,10 @@ public sealed class LibraryDatabaseTests
             var repository = new SqliteSongRepository(database);
             await repository.UpsertBatchAsync(new[]
             {
-                new Song(1, Path.Combine(root, "one.mp3"), "First Light", "Artist One", "Album", TimeSpan.FromMinutes(3)),
+                new Song(1, Path.Combine(root, "one.mp3"), "First Light", "Artist One", "Album", TimeSpan.FromMinutes(3))
+                {
+                    Lyrics = "hello moon"
+                },
                 new Song(2, Path.Combine(root, "two.mp3"), "Night Drive", "Artist Two", "Album", TimeSpan.FromMinutes(3)),
                 new Song(3, Path.Combine(root, "three.mp3"), "Light Years", "Artist Three", "Album", TimeSpan.FromMinutes(3))
             });
@@ -120,6 +123,14 @@ public sealed class LibraryDatabaseTests
             Assert.Equal(2, search.Count);
             Assert.Equal(new[] { 1L, 3L }, search.Select(song => song.Id).OrderBy(id => id));
 
+            search = await repository.SearchAsync("Artist Two", 1, 10);
+            Assert.Single(search);
+            Assert.Equal(2, search[0].Id);
+
+            search = await repository.SearchAsync("moon", 1, 10);
+            Assert.Single(search);
+            Assert.Equal(1, search[0].Id);
+
             await repository.UpsertAsync(new Song(
                 1,
                 Path.Combine(root, "one.mp3"),
@@ -131,6 +142,34 @@ public sealed class LibraryDatabaseTests
             search = await repository.SearchAsync("remastered", 1, 10);
             Assert.Single(search);
             Assert.Equal(1, search[0].Id);
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+        }
+    }
+
+    [Fact]
+    public async Task Library_query_rejects_invalid_page_arguments()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "MusiqTests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+
+        try
+        {
+            var database = new LibraryDatabase(Path.Combine(root, "library.db"));
+            await database.InitializeAsync();
+
+            var repository = new SqliteSongRepository(database);
+
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                () => repository.GetPageAsync(0, 10));
+
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                () => repository.GetPageAsync(1, 0));
+
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                () => repository.SearchAsync("test", 1, 501));
         }
         finally
         {
