@@ -48,4 +48,48 @@ public sealed class LibraryDatabaseTests
             Directory.Delete(root, recursive: true);
         }
     }
+
+    [Fact]
+    public async Task Bulk_file_state_lookup_returns_only_registered_paths()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "MusiqTests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+
+        try
+        {
+            var database = new LibraryDatabase(Path.Combine(root, "library.db"));
+            await database.InitializeAsync();
+
+            var repository = new SqliteSongRepository(database);
+            var existingPath = Path.Combine(root, "Artist - Song.mp3");
+            var missingPath = Path.Combine(root, "Missing.mp3");
+            var modified = DateTimeOffset.UtcNow.AddMinutes(-5);
+
+            await repository.UpsertAsync(new Song(
+                42,
+                existingPath,
+                "Song",
+                "Artist",
+                "Album",
+                TimeSpan.FromMinutes(3))
+            {
+                FileSize = 1234,
+                LastModifiedUtc = modified
+            });
+
+            var states = await repository.GetFileStatesAsync(
+                new[] { existingPath, missingPath });
+
+            var state = Assert.Single(states);
+            Assert.True(states.ContainsKey(existingPath));
+            Assert.False(states.ContainsKey(missingPath));
+            Assert.Equal(existingPath, state.Key);
+            Assert.Equal(1234, state.Value.FileSize);
+            Assert.Equal(modified, state.Value.LastModifiedUtc);
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+        }
+    }
 }
