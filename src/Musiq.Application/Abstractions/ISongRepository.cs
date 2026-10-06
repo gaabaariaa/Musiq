@@ -10,5 +10,8 @@ public interface ISongRepository
         CancellationToken cancellationToken = default);
     Task UpsertAsync(Song song, CancellationToken cancellationToken = default);
     Task UpsertBatchAsync(IReadOnlyList<Song> songs, CancellationToken cancellationToken = default);
-    Task<int> RemoveMissingFilesAsync(IReadOnlySet<string> existingPaths, string rootPath, CancellationToken cancellationToken = default);
+    Task<int> RemoveMissingFilesAsync(
+        IReadOnlyCollection<string> existingPaths,
+        string rootPath,
+        CancellationToken cancellationToken = default);
 }
