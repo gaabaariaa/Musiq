@@ -150,7 +150,7 @@ public sealed class SqliteSongRepository : ISongRepository, ILibraryQuery
     }
 
     public async Task<int> RemoveMissingFilesAsync(
-        IReadOnlySet<string> existingPaths,
+        IReadOnlyCollection<string> existingPaths,
         string rootPath,
         CancellationToken cancellationToken = default)
     {
