@@ -16,16 +16,21 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - run: dotnet restore Musiq.sln
-      - run: dotnet build Musiq.sln --configuration Release --no-restore
-      - run: dotnet test Musiq.sln --configuration Release --no-build
+      - name: Restore
+        run: dotnet restore Musiq.sln
 
-      - name: Publish Windows x64 executable
-        run: dotnet publish src/Musiq.App/Musiq.App.csproj --configuration Release --runtime win-x64 --self-contained true --no-restore -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -o publish
+      - name: Build
+        run: dotnet build Musiq.sln --configuration Release --no-restore
 
-      - name: Upload Windows installer executable
+      - name: Test
+        run: dotnet test Musiq.sln --configuration Release --no-build
+
+      - name: Publish Windows x64
+        run: dotnet publish src/Musiq.App/Musiq.App.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -o publish
+
+      - name: Upload Windows executable
         uses: actions/upload-artifact@v4
         with:
           name: Musiq-Windows-x64
-          path: publish/Musiq.App.exe
+          path: publish/*.exe
           if-no-files-found: error
