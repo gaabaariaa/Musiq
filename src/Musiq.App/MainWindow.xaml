@@ -1288,6 +1288,58 @@
        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
        <Grid>
         <StackPanel>
+         <TextBlock Text="LOADING STATES" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+         <TextBlock Text="Smooth loading experiences" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+         <TextBlock Text="Skeleton surfaces keep the library feeling responsive while content is loading." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+        </StackPanel>
+        <Border Background="{StaticResource GoldSoft}" CornerRadius="9" Padding="9,5" HorizontalAlignment="Right" VerticalAlignment="Center"><TextBlock Text="SKELETON UI" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border>
+       </Grid>
+       <Grid Grid.Row="1" Margin="0,20,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="1.15*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Border Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="15" Margin="0,0,7,0">
+         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="72"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+          <Border Width="64" Height="64" CornerRadius="11" Background="{StaticResource Hover}"/>
+          <StackPanel Grid.Column="1" Margin="13,2,0,0">
+           <Border Height="10" Width="150" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="5"/>
+           <Border Height="8" Width="105" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="4" Margin="0,10,0,0"/>
+           <Border Height="7" Width="72" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="4" Margin="0,12,0,0"/>
+          </StackPanel>
+         </Grid>
+        </Border>
+        <Border Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="15" Margin="7,0">
+         <StackPanel>
+          <Border Height="9" Width="95" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="5"/>
+          <Border Height="8" Width="150" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="4" Margin="0,11,0,0"/>
+          <Border Height="7" Width="120" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="4" Margin="0,11,0,0"/>
+          <Border Height="7" Width="80" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="4" Margin="0,13,0,0"/>
+         </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="15" Margin="7,0,0,0">
+         <StackPanel>
+          <Border Width="52" Height="52" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="11"/>
+          <Border Height="8" Width="125" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="4" Margin="0,12,0,0"/>
+          <Border Height="7" Width="90" HorizontalAlignment="Left" Background="{StaticResource Hover}" CornerRadius="4" Margin="0,9,0,0"/>
+         </StackPanel>
+        </Border>
+       </Grid>
+       <Border Grid.Row="2" Background="{StaticResource GoldSoft}" CornerRadius="12" Padding="14" Margin="0,15,0,0">
+        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <Border Width="36" Height="36" CornerRadius="10" Background="{StaticResource Panel}"><TextBlock Text="◌" Foreground="{StaticResource Gold}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+         <StackPanel Grid.Column="1" Margin="11,0,12,0" VerticalAlignment="Center">
+          <TextBlock Text="LOADING FEEDBACK" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+          <TextBlock Text="Use compact skeletons instead of blank space while library content is being prepared." FontSize="11" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/>
+         </StackPanel>
+         <Border Grid.Column="2" Background="{StaticResource Panel}" CornerRadius="8" Padding="9,6"><TextBlock Text="READY" FontSize="9" Foreground="{StaticResource Text2}" FontWeight="SemiBold"/></Border>
+        </Grid>
+       </Border>
+      </Grid>
+     </Border>
+
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
+      <Grid>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <Grid>
+        <StackPanel>
          <TextBlock Text="ACTION MENU" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
          <TextBlock Text="Quick actions" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
          <TextBlock Text="A consistent action surface for songs, albums, artists, and playlists." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
