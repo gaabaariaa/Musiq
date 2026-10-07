@@ -925,6 +925,37 @@
    </Grid>
   </Border>
 
+  <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Margin="32,0,32,18" Padding="22" VerticalAlignment="Center">
+   <Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <Grid>
+     <StackPanel><TextBlock Text="SETTINGS" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Make Musiq yours" FontSize="26" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="Tune the interface and library experience to your taste." Foreground="{StaticResource Text2}" FontSize="12" Margin="0,4,0,0"/></StackPanel>
+     <Border Background="{StaticResource GoldSoft}" CornerRadius="10" Padding="10,6" HorizontalAlignment="Right" VerticalAlignment="Center"><TextBlock Text="Dark theme" Foreground="{StaticResource Gold}" FontSize="10"/></Border>
+    </Grid>
+    <Grid Grid.Row="1" Margin="0,20,0,0">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+     <Border Background="{StaticResource Soft}" CornerRadius="13" Padding="16" Margin="0,0,7,0">
+      <StackPanel><TextBlock Text="APPEARANCE" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Dark" FontSize="17" FontWeight="SemiBold" Margin="0,7,0,0"/><TextBlock Text="Musiq uses a focused dark interface." FontSize="10" Foreground="{StaticResource Text2}" TextWrapping="Wrap" Margin="0,3,0,0"/><Border Background="{StaticResource GoldSoft}" CornerRadius="8" Padding="8,5" Margin="0,12,0,0" HorizontalAlignment="Left"><TextBlock Text="●  Active" Foreground="{StaticResource Gold}" FontSize="9"/></Border></StackPanel>
+     </Border>
+     <Border Grid.Column="1" Background="{StaticResource Soft}" CornerRadius="13" Padding="16" Margin="7,0">
+      <StackPanel><TextBlock Text="PLAYBACK" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Gapless playback" FontSize="17" FontWeight="SemiBold" Margin="0,7,0,0"/><TextBlock Text="Keep albums flowing without pauses." FontSize="10" Foreground="{StaticResource Text2}" TextWrapping="Wrap" Margin="0,3,0,0"/><Border Background="{StaticResource GoldSoft}" CornerRadius="8" Padding="8,5" Margin="0,12,0,0" HorizontalAlignment="Left"><TextBlock Text="ON" Foreground="{StaticResource Gold}" FontSize="9" FontWeight="Bold"/></Border></StackPanel>
+     </Border>
+     <Border Grid.Column="2" Background="{StaticResource Soft}" CornerRadius="13" Padding="16" Margin="7,0,0,0">
+      <StackPanel><TextBlock Text="LIBRARY" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Comfortable" FontSize="17" FontWeight="SemiBold" Margin="0,7,0,0"/><TextBlock Text="Balanced spacing for everyday browsing." FontSize="10" Foreground="{StaticResource Text2}" TextWrapping="Wrap" Margin="0,3,0,0"/><Border Background="{StaticResource GoldSoft}" CornerRadius="8" Padding="8,5" Margin="0,12,0,0" HorizontalAlignment="Left"><TextBlock Text="ACTIVE" Foreground="{StaticResource Gold}" FontSize="9" FontWeight="Bold"/></Border></StackPanel>
+     </Border>
+    </Grid>
+    <Border Grid.Row="2" Background="{StaticResource Soft}" CornerRadius="13" Padding="16" Margin="0,14,0,0">
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <StackPanel><TextBlock Text="INTERFACE" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Player layout" FontSize="13" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="Expanded controls" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,2,0,0"/></StackPanel>
+      <StackPanel Grid.Column="1"><TextBlock Text="LIBRARY SORT" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Recently added" FontSize="13" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="Newest first" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,2,0,0"/></StackPanel>
+      <StackPanel Grid.Column="2"><TextBlock Text="AUDIO" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="High quality" FontSize="13" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="Best available source" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,2,0,0"/></StackPanel>
+      <Button Grid.Column="3" Style="{StaticResource Chip}" Background="{StaticResource GoldSoft}" Foreground="{StaticResource Gold}" Content="Reset to default" VerticalAlignment="Center"/>
+     </Grid>
+    </Border>
+   </Grid>
+  </Border>
+
   <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="16" Margin="32,0,32,8" Padding="14,12" VerticalAlignment="Bottom">
    <Grid>
     <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
