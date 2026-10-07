@@ -296,6 +296,37 @@
       <Border Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="12" Margin="8,0,0,0"><StackPanel><Grid Height="125"><Border CornerRadius="11" Background="#25272D"><TextBlock Text="♫" FontSize="44" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><Border Background="{StaticResource Gold}" CornerRadius="17" Width="34" Height="34" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8"><TextBlock Text="▶" Foreground="#15120C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border></Grid><TextBlock Text="Open Roads" FontWeight="SemiBold" Margin="2,9,0,0"/><TextBlock Text="Northbound" Foreground="{StaticResource Text2}" FontSize="11" Margin="2,3,0,0"/></StackPanel></Border>
      </UniformGrid>
 
+     <Border Background="{StaticResource Panel}" CornerRadius="18" Padding="24" Margin="0,0,0,24">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="220"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+       <StackPanel>
+        <TextBlock Text="SETTINGS" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+        <TextBlock Text="Make Musiq yours" FontSize="25" FontWeight="SemiBold" Margin="0,7,0,0"/>
+        <TextBlock Text="Appearance, playback and library preferences." Foreground="{StaticResource Text2}" FontSize="12" TextWrapping="Wrap" Margin="0,5,20,0"/>
+       </StackPanel>
+       <StackPanel Grid.Column="1">
+        <Border Background="{StaticResource Soft}" CornerRadius="12" Padding="15" Margin="0,0,0,9">
+         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+          <StackPanel><TextBlock Text="Dark appearance" FontWeight="SemiBold"/><TextBlock Text="Comfortable dark interface" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/></StackPanel>
+          <Border Grid.Column="1" Width="42" Height="24" Background="{StaticResource Gold}" CornerRadius="12" HorizontalAlignment="Right"><Ellipse Width="18" Height="18" Fill="#15120C" HorizontalAlignment="Right" Margin="0,0,3,0"/></Border>
+         </Grid>
+        </Border>
+        <Border Background="{StaticResource Soft}" CornerRadius="12" Padding="15" Margin="0,0,0,9">
+         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+          <StackPanel><TextBlock Text="Gapless playback" FontWeight="SemiBold"/><TextBlock Text="Keep albums flowing between tracks" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/></StackPanel>
+          <TextBlock Grid.Column="1" Text="ON" Foreground="{StaticResource Gold}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+         </Grid>
+        </Border>
+        <Border Background="{StaticResource Soft}" CornerRadius="12" Padding="15">
+         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+          <StackPanel><TextBlock Text="Library layout" FontWeight="SemiBold"/><TextBlock Text="Choose how your music is displayed" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/></StackPanel>
+          <TextBlock Grid.Column="1" Text="Comfortable" Foreground="{StaticResource Text2}" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+         </Grid>
+        </Border>
+       </StackPanel>
+      </Grid>
+     </Border>
+
      <StackPanel Margin="0,0,0,24">
       <Grid Margin="0,0,0,14">
        <StackPanel>
