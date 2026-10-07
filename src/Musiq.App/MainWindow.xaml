@@ -901,6 +901,30 @@
    </Grid>
   </Border>
 
+  <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Margin="32,0,32,18" Padding="22" VerticalAlignment="Center">
+   <Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <Grid>
+     <StackPanel><TextBlock Text="FAVORITES" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Your favorite music" FontSize="26" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="Everything you saved for quick access." Foreground="{StaticResource Text2}" FontSize="12" Margin="0,4,0,0"/></StackPanel>
+     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"><Border Background="{StaticResource GoldSoft}" CornerRadius="10" Padding="10,6" Margin="0,0,8,0"><TextBlock Text="48 favorites" Foreground="{StaticResource Gold}" FontSize="10"/></Border><Button Style="{StaticResource RoundPlay}" Content="▶"/></StackPanel>
+    </Grid>
+    <Grid Grid.Row="1" Margin="0,20,0,10">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <TextBlock Text="Recently added" FontSize="14" FontWeight="SemiBold"/>
+     <StackPanel Grid.Column="1" Orientation="Horizontal"><Button Style="{StaticResource Chip}" Background="{StaticResource GoldSoft}" Foreground="{StaticResource Gold}" Content="All"/><Button Style="{StaticResource Chip}" Content="Songs"/><Button Style="{StaticResource Chip}" Content="Albums"/></StackPanel>
+    </Grid>
+    <Border Grid.Row="2" Background="{StaticResource Soft}" CornerRadius="12" Padding="8">
+     <StackPanel>
+      <Grid Margin="7,2,7,8"><Grid.ColumnDefinitions><ColumnDefinition Width="40"/><ColumnDefinition Width="*"/><ColumnDefinition Width="150"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions><TextBlock Text="#" Foreground="{StaticResource Muted}" FontSize="9"/><TextBlock Grid.Column="1" Text="TITLE" Foreground="{StaticResource Muted}" FontSize="9"/><TextBlock Grid.Column="2" Text="ALBUM" Foreground="{StaticResource Muted}" FontSize="9"/><TextBlock Grid.Column="3" Text="TIME" Foreground="{StaticResource Muted}" FontSize="9"/></Grid>
+      <Separator Background="{StaticResource Line}"/>
+      <Border Background="{StaticResource GoldSoft}" CornerRadius="9" Padding="7" Margin="0,5"><Grid Height="48"><Grid.ColumnDefinitions><ColumnDefinition Width="40"/><ColumnDefinition Width="*"/><ColumnDefinition Width="150"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions><TextBlock Text="01" Foreground="{StaticResource Gold}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Midnight Drive" FontWeight="SemiBold" FontSize="12"/><TextBlock Text="Neon Avenue" Foreground="{StaticResource Text2}" FontSize="10"/></StackPanel><TextBlock Grid.Column="2" Text="Night City" Foreground="{StaticResource Text2}" FontSize="10" VerticalAlignment="Center"/><TextBlock Grid.Column="3" Text="4:18" Foreground="{StaticResource Text2}" FontSize="10" VerticalAlignment="Center"/></Grid></Border>
+      <Border Padding="7" Margin="0,0,0,5"><Grid Height="48"><Grid.ColumnDefinitions><ColumnDefinition Width="40"/><ColumnDefinition Width="*"/><ColumnDefinition Width="150"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions><TextBlock Text="02" Foreground="{StaticResource Muted}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Blue Hour" FontWeight="SemiBold" FontSize="12"/><TextBlock Text="Neon Avenue" Foreground="{StaticResource Text2}" FontSize="10"/></StackPanel><TextBlock Grid.Column="2" Text="Blue Hour" Foreground="{StaticResource Text2}" FontSize="10" VerticalAlignment="Center"/><TextBlock Grid.Column="3" Text="3:58" Foreground="{StaticResource Text2}" FontSize="10" VerticalAlignment="Center"/></Grid></Border>
+      <Border Padding="7"><Grid Height="48"><Grid.ColumnDefinitions><ColumnDefinition Width="40"/><ColumnDefinition Width="*"/><ColumnDefinition Width="150"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions><TextBlock Text="03" Foreground="{StaticResource Muted}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Golden Lines" FontWeight="SemiBold" FontSize="12"/><TextBlock Text="Mira Stone" Foreground="{StaticResource Text2}" FontSize="10"/></StackPanel><TextBlock Grid.Column="2" Text="Golden Lines" Foreground="{StaticResource Text2}" FontSize="10" VerticalAlignment="Center"/><TextBlock Grid.Column="3" Text="4:06" Foreground="{StaticResource Text2}" FontSize="10" VerticalAlignment="Center"/></Grid></Border>
+     </StackPanel>
+    </Border>
+   </Grid>
+  </Border>
+
   <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="16" Margin="32,0,32,8" Padding="14,12" VerticalAlignment="Bottom">
    <Grid>
     <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
