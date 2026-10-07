@@ -1343,6 +1343,56 @@
       </Grid>
      </Border>
 
+
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
+      <Grid>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <StackPanel>
+        <TextBlock Text="EMPTY STATES" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+        <TextBlock Text="Thoughtful empty experiences" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+        <TextBlock Text="Clear guidance for moments when there is nothing to show yet." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+       </StackPanel>
+       <Grid Grid.Row="1" Margin="0,20,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Border Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="18" Margin="0,0,7,0">
+         <StackPanel HorizontalAlignment="Center">
+          <Border Width="56" Height="56" CornerRadius="18" Background="{StaticResource GoldSoft}" HorizontalAlignment="Center"><TextBlock Text="♡" FontSize="26" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <TextBlock Text="No favorites yet" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+          <TextBlock Text="Save songs you love and find them here." TextWrapping="Wrap" TextAlignment="Center" FontSize="10" Foreground="{StaticResource Text2}" Margin="8,5,8,0"/>
+          <Button Style="{StaticResource Chip}" Content="Browse music" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+         </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="18" Margin="7,0">
+         <StackPanel HorizontalAlignment="Center">
+          <Border Width="56" Height="56" CornerRadius="18" Background="{StaticResource GoldSoft}" HorizontalAlignment="Center"><TextBlock Text="☷" FontSize="25" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <TextBlock Text="Queue is empty" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+          <TextBlock Text="Add tracks to build your next listening session." TextWrapping="Wrap" TextAlignment="Center" FontSize="10" Foreground="{StaticResource Text2}" Margin="8,5,8,0"/>
+          <Button Style="{StaticResource Chip}" Content="Explore library" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+         </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="18" Margin="7,0,0,0">
+         <StackPanel HorizontalAlignment="Center">
+          <Border Width="56" Height="56" CornerRadius="18" Background="{StaticResource GoldSoft}" HorizontalAlignment="Center"><TextBlock Text="⌕" FontSize="27" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <TextBlock Text="No results found" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+          <TextBlock Text="Try another search or browse your library." TextWrapping="Wrap" TextAlignment="Center" FontSize="10" Foreground="{StaticResource Text2}" Margin="8,5,8,0"/>
+          <Button Style="{StaticResource Chip}" Content="Clear search" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+         </StackPanel>
+        </Border>
+       </Grid>
+       <Border Grid.Row="2" Background="{StaticResource GoldSoft}" CornerRadius="12" Padding="14" Margin="0,15,0,0">
+        <Grid>
+         <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <TextBlock Text="✦" FontSize="19" Foreground="{StaticResource Gold}" VerticalAlignment="Center"/>
+         <StackPanel Grid.Column="1" Margin="12,0,12,0" VerticalAlignment="Center">
+          <TextBlock Text="DESIGNED FOR RECOVERY" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+          <TextBlock Text="Empty states guide the listener toward the next useful action." FontSize="11" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/>
+         </StackPanel>
+         <Border Grid.Column="2" Background="{StaticResource Panel}" CornerRadius="8" Padding="9,6"><TextBlock Text="MUSIQ" FontSize="9" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border>
+        </Grid>
+       </Border>
+      </Grid>
+     </Border>
+
   <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#15161B" BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0" Padding="18,9">
    <Grid>
     <Grid.ColumnDefinitions><ColumnDefinition Width="340"/><ColumnDefinition Width="*"/><ColumnDefinition Width="360"/></Grid.ColumnDefinitions>
