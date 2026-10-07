@@ -36,6 +36,19 @@
    <Setter Property="BorderThickness" Value="0"/><Setter Property="Cursor" Value="Hand"/>
    <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border Background="{TemplateBinding Background}" CornerRadius="20"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#E3C27A"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
   </Style>
+  <Style x:Key="SurfaceCard" TargetType="Border">
+   <Setter Property="Background" Value="{StaticResource Panel}"/>
+   <Setter Property="BorderBrush" Value="{StaticResource Line}"/>
+   <Setter Property="BorderThickness" Value="1"/>
+   <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+   <Setter Property="Cursor" Value="Hand"/>
+   <Style.Triggers>
+    <Trigger Property="IsMouseOver" Value="True">
+     <Setter Property="Background" Value="{StaticResource Hover}"/>
+     <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
+    </Trigger>
+   </Style.Triggers>
+  </Style>
  </Window.Resources>
  <Grid>
   <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="90"/></Grid.RowDefinitions>
@@ -156,6 +169,65 @@
         </Border>
        </UniformGrid>
       </StackPanel>
+     </Border>
+
+     <Border Background="{StaticResource Panel}" CornerRadius="18" Padding="24" Margin="0,0,0,24" BorderBrush="{StaticResource Line}" BorderThickness="1">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="*"/><ColumnDefinition Width="160"/></Grid.ColumnDefinitions>
+       <Border Width="182" Height="182" CornerRadius="16" Background="#29252B" BorderBrush="{StaticResource Line}" BorderThickness="1">
+        <Grid>
+         <TextBlock Text="♫" FontSize="72" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+         <Border Background="#15161B" CornerRadius="9" Padding="8,5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12">
+          <TextBlock Text="ALBUM" FontSize="8" FontWeight="Bold" Foreground="{StaticResource Gold}"/>
+         </Border>
+        </Grid>
+       </Border>
+       <StackPanel Grid.Column="1" Margin="22,4,20,0" VerticalAlignment="Center">
+        <TextBlock Text="ALBUM DETAILS" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+        <TextBlock Text="Night City" FontSize="30" FontWeight="SemiBold" Margin="0,7,0,0"/>
+        <TextBlock Text="Neon Avenue" FontSize="14" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+        <TextBlock Text="2026  ·  12 songs  ·  48 min" FontSize="11" Foreground="{StaticResource Muted}" Margin="0,8,0,16"/>
+        <StackPanel Orientation="Horizontal">
+         <Button Style="{StaticResource RoundPlay}" Content="▶" Width="44" Height="44"/>
+         <Button Style="{StaticResource Icon}" Content="⋮" Margin="8,0,0,0"/>
+        </StackPanel>
+       </StackPanel>
+       <StackPanel Grid.Column="2" VerticalAlignment="Center">
+        <TextBlock Text="TOP TRACK" FontSize="9" Foreground="{StaticResource Muted}"/>
+        <TextBlock Text="Midnight Drive" FontSize="14" FontWeight="SemiBold" Margin="0,5,0,0"/>
+        <TextBlock Text="4:18" FontSize="11" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/>
+        <Border Background="{StaticResource GoldSoft}" CornerRadius="10" Padding="9,6" Margin="0,12,0,0">
+         <TextBlock Text="12 tracks" FontSize="10" Foreground="{StaticResource Gold}"/>
+        </Border>
+       </StackPanel>
+      </Grid>
+     </Border>
+
+     <Border Background="{StaticResource Panel}" CornerRadius="18" Padding="22" Margin="0,0,0,24">
+      <Grid>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <Grid>
+        <StackPanel><TextBlock Text="Night City · Tracklist" FontSize="20" FontWeight="SemiBold"/><TextBlock Text="Songs from this album" Foreground="{StaticResource Text2}" FontSize="11" Margin="0,4,0,0"/></StackPanel>
+        <TextBlock Text="12 songs" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource Muted}" FontSize="10"/>
+       </Grid>
+       <StackPanel Grid.Row="1" Margin="0,16,0,0">
+        <Border Style="{StaticResource SurfaceCard}" CornerRadius="10" Padding="10" Margin="0,0,0,6">
+         <Grid Height="44"><Grid.ColumnDefinitions><ColumnDefinition Width="35"/><ColumnDefinition Width="*"/><ColumnDefinition Width="120"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+          <TextBlock Text="01" Foreground="{StaticResource Gold}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Midnight Drive" FontWeight="SemiBold" FontSize="12"/><TextBlock Text="Neon Avenue" FontSize="10" Foreground="{StaticResource Text2}"/></StackPanel><TextBlock Grid.Column="2" Text="Night City" FontSize="10" Foreground="{StaticResource Text2}" VerticalAlignment="Center"/><TextBlock Grid.Column="3" Text="4:18" FontSize="10" Foreground="{StaticResource Text2}" VerticalAlignment="Center"/>
+         </Grid>
+        </Border>
+        <Border Style="{StaticResource SurfaceCard}" CornerRadius="10" Padding="10" Margin="0,0,0,6">
+         <Grid Height="44"><Grid.ColumnDefinitions><ColumnDefinition Width="35"/><ColumnDefinition Width="*"/><ColumnDefinition Width="120"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+          <TextBlock Text="02" Foreground="{StaticResource Muted}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="City Lights" FontWeight="SemiBold" FontSize="12"/><TextBlock Text="Neon Avenue" FontSize="10" Foreground="{StaticResource Text2}"/></StackPanel><TextBlock Grid.Column="2" Text="Night City" FontSize="10" Foreground="{StaticResource Text2}" VerticalAlignment="Center"/><TextBlock Grid.Column="3" Text="3:54" FontSize="10" Foreground="{StaticResource Text2}" VerticalAlignment="Center"/>
+         </Grid>
+        </Border>
+        <Border Style="{StaticResource SurfaceCard}" CornerRadius="10" Padding="10">
+         <Grid Height="44"><Grid.ColumnDefinitions><ColumnDefinition Width="35"/><ColumnDefinition Width="*"/><ColumnDefinition Width="120"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+          <TextBlock Text="03" Foreground="{StaticResource Muted}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Neon Rain" FontWeight="SemiBold" FontSize="12"/><TextBlock Text="Neon Avenue" FontSize="10" Foreground="{StaticResource Text2}"/></StackPanel><TextBlock Grid.Column="2" Text="Night City" FontSize="10" Foreground="{StaticResource Text2}" VerticalAlignment="Center"/><TextBlock Grid.Column="3" Text="4:06" FontSize="10" Foreground="{StaticResource Text2}" VerticalAlignment="Center"/>
+         </Grid>
+        </Border>
+       </StackPanel>
+      </Grid>
      </Border>
 
      <Border Background="{StaticResource Panel}" CornerRadius="18" Padding="25" Margin="0,0,0,24">
