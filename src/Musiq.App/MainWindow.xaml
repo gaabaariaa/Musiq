@@ -145,6 +145,28 @@
       <Button Style="{StaticResource Chip}" Content="Playlists"/>
      </StackPanel>
 
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="14" Margin="0,0,0,22">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <TextBlock Text="LIBRARY" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,14,0"/>
+        <Button Style="{StaticResource Chip}" Background="{StaticResource GoldSoft}" Foreground="{StaticResource Gold}" Content="All"/>
+        <Button Style="{StaticResource Chip}" Content="Songs"/>
+        <Button Style="{StaticResource Chip}" Content="Albums"/>
+        <Button Style="{StaticResource Chip}" Content="Artists"/>
+        <Button Style="{StaticResource Chip}" Content="Favorites"/>
+       </StackPanel>
+       <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+        <Border Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="10" Padding="11,7" Margin="0,0,8,0">
+         <StackPanel Orientation="Horizontal"><TextBlock Text="↕" Foreground="{StaticResource Muted}" Margin="0,0,7,0"/><TextBlock Text="Recently added" Foreground="{StaticResource Text2}" FontSize="11"/></StackPanel>
+        </Border>
+        <Border Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="10" Padding="10,7">
+         <StackPanel Orientation="Horizontal"><TextBlock Text="▦" Foreground="{StaticResource Gold}" Margin="0,0,7,0"/><TextBlock Text="Comfortable" Foreground="{StaticResource Text2}" FontSize="11"/></StackPanel>
+        </Border>
+       </StackPanel>
+      </Grid>
+     </Border>
+
      <Grid Margin="0,0,0,22">
       <Grid Margin="0,0,0,14">
        <StackPanel><TextBlock Text="DISCOVER" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Artists and albums" FontSize="22" FontWeight="SemiBold" Margin="0,5,0,0"/></StackPanel>
