@@ -296,6 +296,86 @@
       <Border Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="12" Margin="8,0,0,0"><StackPanel><Grid Height="125"><Border CornerRadius="11" Background="#25272D"><TextBlock Text="♫" FontSize="44" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><Border Background="{StaticResource Gold}" CornerRadius="17" Width="34" Height="34" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8"><TextBlock Text="▶" Foreground="#15120C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border></Grid><TextBlock Text="Open Roads" FontWeight="SemiBold" Margin="2,9,0,0"/><TextBlock Text="Northbound" Foreground="{StaticResource Text2}" FontSize="11" Margin="2,3,0,0"/></StackPanel></Border>
      </UniformGrid>
 
+     <StackPanel Margin="0,0,0,24">
+      <Grid Margin="0,0,0,14">
+       <StackPanel>
+        <TextBlock Text="Playlists" FontSize="20" FontWeight="SemiBold"/>
+        <TextBlock Text="Curated collections for every mood" Foreground="{StaticResource Text2}" FontSize="11" Margin="0,4,0,0"/>
+       </StackPanel>
+       <Button Content="View all" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderThickness="0" Foreground="{StaticResource Text2}"/>
+      </Grid>
+      <UniformGrid Columns="4" Margin="0,0,0,18">
+       <Border Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="12" Margin="0,0,8,0">
+        <StackPanel>
+         <Grid Height="125">
+          <Border CornerRadius="11" Background="{StaticResource GoldSoft}"><TextBlock Text="★" FontSize="42" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <Border Background="{StaticResource Gold}" CornerRadius="17" Width="34" Height="34" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8"><TextBlock Text="▶" Foreground="#15120C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border>
+         </Grid>
+         <TextBlock Text="Favorites Mix" FontWeight="SemiBold" Margin="2,9,0,0"/>
+         <TextBlock Text="48 songs · 3h 12m" Foreground="{StaticResource Text2}" FontSize="11" Margin="2,3,0,0"/>
+        </StackPanel>
+       </Border>
+       <Border Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="12" Margin="8,0">
+        <StackPanel>
+         <Grid Height="125">
+          <Border CornerRadius="11" Background="#25272D"><TextBlock Text="⌁" FontSize="48" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <Border Background="{StaticResource Gold}" CornerRadius="17" Width="34" Height="34" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8"><TextBlock Text="▶" Foreground="#15120C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border>
+         </Grid>
+         <TextBlock Text="Road Trip" FontWeight="SemiBold" Margin="2,9,0,0"/>
+         <TextBlock Text="36 songs · 2h 41m" Foreground="{StaticResource Text2}" FontSize="11" Margin="2,3,0,0"/>
+        </StackPanel>
+       </Border>
+       <Border Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="12" Margin="8,0">
+        <StackPanel>
+         <Grid Height="125">
+          <Border CornerRadius="11" Background="#2B2925"><TextBlock Text="☾" FontSize="42" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <Border Background="{StaticResource Gold}" CornerRadius="17" Width="34" Height="34" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8"><TextBlock Text="▶" Foreground="#15120C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border>
+         </Grid>
+         <TextBlock Text="Late Night" FontWeight="SemiBold" Margin="2,9,0,0"/>
+         <TextBlock Text="22 songs · 1h 28m" Foreground="{StaticResource Text2}" FontSize="11" Margin="2,3,0,0"/>
+        </StackPanel>
+       </Border>
+       <Border Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="12" Margin="8,0,0,0">
+        <StackPanel>
+         <Grid Height="125">
+          <Border CornerRadius="11" Background="#24272B"><TextBlock Text="◈" FontSize="42" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <Border Background="{StaticResource Gold}" CornerRadius="17" Width="34" Height="34" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8"><TextBlock Text="▶" Foreground="#15120C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border>
+         </Grid>
+         <TextBlock Text="Focus Mode" FontWeight="SemiBold" Margin="2,9,0,0"/>
+         <TextBlock Text="18 songs · 1h 16m" Foreground="{StaticResource Text2}" FontSize="11" Margin="2,3,0,0"/>
+        </StackPanel>
+       </Border>
+      </UniformGrid>
+
+      <Border Background="{StaticResource Panel}" CornerRadius="18" Padding="22">
+       <Grid>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="190"/><ColumnDefinition Width="*"/><ColumnDefinition Width="170"/></Grid.ColumnDefinitions>
+        <Border Width="165" Height="165" CornerRadius="14" Background="{StaticResource GoldSoft}">
+         <Grid>
+          <TextBlock Text="★" FontSize="66" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          <Border Background="#15161B" CornerRadius="8" Padding="7,4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"><TextBlock Text="PLAYLIST" FontSize="8" FontWeight="Bold" Foreground="{StaticResource Gold}"/></Border>
+         </Grid>
+        </Border>
+        <StackPanel Grid.Column="1" Margin="20,0" VerticalAlignment="Center">
+         <TextBlock Text="PLAYLIST DETAILS" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+         <TextBlock Text="Favorites Mix" FontSize="28" FontWeight="SemiBold" Margin="0,7,0,0"/>
+         <TextBlock Text="Your favorite tracks, ready to play." Foreground="{StaticResource Text2}" FontSize="12" Margin="0,5,0,10"/>
+         <TextBlock Text="48 songs · 3h 12m" Foreground="{StaticResource Muted}" FontSize="11"/>
+         <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+          <Button Style="{StaticResource RoundPlay}" Content="▶" Margin="0,0,8,0"/>
+          <Button Content="Shuffle" Background="{StaticResource Soft}" Foreground="{StaticResource Text2}" BorderThickness="0" Padding="14,9" Margin="0,0,8,0"/>
+          <Button Content="⋮" Background="{StaticResource Soft}" Foreground="{StaticResource Text2}" BorderThickness="0" Width="38"/>
+         </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+         <TextBlock Text="CREATED BY" FontSize="9" Foreground="{StaticResource Muted}"/>
+         <TextBlock Text="You" FontSize="15" FontWeight="SemiBold" Margin="0,4,0,0"/>
+         <TextBlock Text="Updated today" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,5,0,0"/>
+        </StackPanel>
+       </Grid>
+      </Border>
+     </StackPanel>
+
      <Border Background="{StaticResource Panel}" CornerRadius="18" Padding="25" Margin="0,0,0,24">
       <Grid>
        <Grid.ColumnDefinitions><ColumnDefinition Width="175"/><ColumnDefinition Width="*"/><ColumnDefinition Width="155"/></Grid.ColumnDefinitions>
