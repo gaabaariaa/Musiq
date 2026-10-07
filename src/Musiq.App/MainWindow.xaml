@@ -93,6 +93,41 @@
 
    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
     <StackPanel>
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="20" Margin="0,0,0,22">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="180"/><ColumnDefinition Width="*"/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
+       <Border Width="160" Height="160" CornerRadius="14" Background="{StaticResource GoldSoft}">
+        <Grid>
+         <TextBlock Text="♫" FontSize="62" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+         <Border Background="#15161B" CornerRadius="8" Padding="7,4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9"><TextBlock Text="NOW PLAYING" FontSize="7" FontWeight="Bold" Foreground="{StaticResource Gold}"/></Border>
+        </Grid>
+       </Border>
+       <StackPanel Grid.Column="1" Margin="22,0" VerticalAlignment="Center">
+        <TextBlock Text="NOW PLAYING" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+        <TextBlock Text="Midnight Drive" FontSize="26" FontWeight="SemiBold" Margin="0,6,0,0"/>
+        <TextBlock Text="Neon Avenue · Night City" Foreground="{StaticResource Text2}" FontSize="12" Margin="0,4,0,0"/>
+        <Grid Margin="0,16,0,0">
+         <ProgressBar Height="4" Value="42" Maximum="100" Foreground="{StaticResource Gold}" Background="{StaticResource Hover}"/>
+         <TextBlock Text="1:42" FontSize="9" Foreground="{StaticResource Text2}" Margin="0,10,0,0"/>
+         <TextBlock Text="4:18" FontSize="9" Foreground="{StaticResource Text2}" HorizontalAlignment="Right" Margin="0,10,0,0"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Margin="0,22,0,0">
+         <Button Style="{StaticResource Icon}" Content="↶" Margin="0,0,4,0"/>
+         <Button Style="{StaticResource Icon}" Content="◀" Margin="0,0,4,0"/>
+         <Button Style="{StaticResource RoundPlay}" Content="▶" Width="46" Height="46" Margin="0,0,4,0"/>
+         <Button Style="{StaticResource Icon}" Content="▶" Margin="0,0,4,0"/>
+         <Button Style="{StaticResource Icon}" Content="↷"/>
+        </StackPanel>
+       </StackPanel>
+       <StackPanel Grid.Column="2" VerticalAlignment="Center">
+        <TextBlock Text="QUICK CONTROLS" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/>
+        <Button Style="{StaticResource Nav}" Margin="0,7,0,0"><StackPanel Orientation="Horizontal"><TextBlock Text="♡" Width="26" FontSize="16"/><TextBlock Text="Add to favorites"/></StackPanel></Button>
+        <Button Style="{StaticResource Nav}"><StackPanel Orientation="Horizontal"><TextBlock Text="☷" Width="26"/><TextBlock Text="Open queue"/></StackPanel></Button>
+        <Button Style="{StaticResource Nav}"><StackPanel Orientation="Horizontal"><TextBlock Text="⌁" Width="26"/><TextBlock Text="Lyrics"/></StackPanel></Button>
+       </StackPanel>
+      </Grid>
+     </Border>
+
      <Border Background="{StaticResource Panel}" CornerRadius="18" Padding="22" Margin="0,0,0,22">
       <StackPanel>
        <TextBlock Text="SEARCH" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
