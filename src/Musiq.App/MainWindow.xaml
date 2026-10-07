@@ -860,6 +860,30 @@
       </Border>
      </Grid>
     </StackPanel>
+
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
+      <StackPanel>
+       <TextBlock Text="VISUAL POLISH" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+       <TextBlock Text="Album &amp; artist surfaces" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+       <TextBlock Text="A cleaner hierarchy for artwork, metadata, stats, and primary actions." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+       <Grid Margin="0,20,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="1.1*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Border Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="0,0,7,0">
+         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+          <Border Width="132" Height="132" CornerRadius="14" Background="{StaticResource GoldSoft}" VerticalAlignment="Center"><Grid><TextBlock Text="♫" FontSize="52" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/><Border Background="{StaticResource Panel}" CornerRadius="7" Padding="6,3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8"><TextBlock Text="ALBUM" FontSize="7" Foreground="{StaticResource Gold}" FontWeight="Bold"/></Border></Grid></Border>
+          <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="14,0,0,0"><TextBlock Text="ALBUM" FontSize="8" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Night City" FontSize="23" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="Neon Avenue · 2026" FontSize="11" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/><StackPanel Orientation="Horizontal" Margin="0,13,0,0"><Border Background="{StaticResource GoldSoft}" CornerRadius="8" Padding="7,3"><TextBlock Text="12 songs" FontSize="8" Foreground="{StaticResource Gold}"/></Border><TextBlock Text="  ·  48 min" FontSize="9" Foreground="{StaticResource Muted}" VerticalAlignment="Center"/></StackPanel><StackPanel Orientation="Horizontal" Margin="0,13,0,0"><Button Style="{StaticResource RoundPlay}" Content="▶" Width="36" Height="36"/><Button Style="{StaticResource Chip}" Content="Shuffle" Margin="8,0,0,0"/></StackPanel></StackPanel>
+         </Grid>
+        </Border>
+        <Border Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="7,0,0,0">
+         <StackPanel><TextBlock Text="ARTIST" FontSize="8" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Neon Avenue" FontSize="23" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="Electronic" FontSize="11" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/>
+          <Grid Margin="0,16,0,0"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions><StackPanel><TextBlock Text="6" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="Albums" FontSize="9" Foreground="{StaticResource Muted}"/></StackPanel><StackPanel Grid.Column="1"><TextBlock Text="84" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="Songs" FontSize="9" Foreground="{StaticResource Muted}"/></StackPanel><StackPanel Grid.Column="2"><TextBlock Text="32" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="Plays/week" FontSize="9" Foreground="{StaticResource Muted}"/></StackPanel></Grid>
+          <Border Background="{StaticResource GoldSoft}" CornerRadius="10" Padding="10" Margin="0,14,0,0"><Grid><TextBlock Text="TOP SONG" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Midnight Drive · 4:18" HorizontalAlignment="Right" FontSize="10"/></Grid></Border>
+         </StackPanel>
+        </Border>
+       </Grid>
+       <Border Background="{StaticResource GoldSoft}" CornerRadius="12" Padding="13" Margin="0,15,0,0"><Grid><TextBlock Text="DETAIL HIERARCHY" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Artwork → title → metadata → stats → primary action" HorizontalAlignment="Right" FontSize="10" Foreground="{StaticResource Text2}"/></Grid></Border>
+      </StackPanel>
+     </Border>
    </ScrollViewer>
   </Grid>
 
