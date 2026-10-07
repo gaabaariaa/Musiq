@@ -1399,6 +1399,52 @@
      <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
       <Grid>
        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <Grid>
+        <StackPanel>
+         <TextBlock Text="RESPONSIVE UI" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+         <TextBlock Text="Adaptive layout states" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+         <TextBlock Text="A visual system prepared for wide, compact, and narrow desktop windows." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+        </StackPanel>
+        <Border Background="{StaticResource GoldSoft}" CornerRadius="9" Padding="9,5" HorizontalAlignment="Right" VerticalAlignment="Center"><TextBlock Text="ADAPTIVE" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border>
+       </Grid>
+       <Grid Grid.Row="1" Margin="0,20,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="1.25*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="0.85*"/></Grid.ColumnDefinitions>
+        <Border Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="0,0,7,0">
+         <Grid>
+          <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+          <StackPanel Orientation="Horizontal"><Border Width="30" Height="30" CornerRadius="9" Background="{StaticResource GoldSoft}"><TextBlock Text="▦" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><StackPanel Margin="10,0,0,0"><TextBlock Text="WIDE" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Full navigation" FontSize="13" FontWeight="SemiBold" Margin="0,2,0,0"/></StackPanel></StackPanel>
+          <TextBlock Grid.Row="1" Text="Sidebar + full content grid + expanded mini player." FontSize="10" Foreground="{StaticResource Text2}" TextWrapping="Wrap" Margin="0,13,0,0"/>
+          <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,14,0,0"><Border Background="{StaticResource GoldSoft}" CornerRadius="8" Padding="8,5" Margin="0,0,6,0"><TextBlock Text="1440+" FontSize="8" Foreground="{StaticResource Gold}"/></Border><TextBlock Text="Primary desktop" FontSize="9" Foreground="{StaticResource Muted}" VerticalAlignment="Center"/></StackPanel>
+         </Grid>
+        </Border>
+        <Border Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="7,0">
+         <StackPanel>
+          <StackPanel Orientation="Horizontal"><Border Width="30" Height="30" CornerRadius="9" Background="{StaticResource GoldSoft}"><TextBlock Text="▤" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><StackPanel Margin="10,0,0,0"><TextBlock Text="COMPACT" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Reduced density" FontSize="13" FontWeight="SemiBold" Margin="0,2,0,0"/></StackPanel></StackPanel>
+          <TextBlock Text="Tighter cards, shorter labels, preserved player controls." FontSize="10" Foreground="{StaticResource Text2}" TextWrapping="Wrap" Margin="0,13,0,0"/>
+          <Border Background="{StaticResource Panel}" CornerRadius="8" Padding="8,5" HorizontalAlignment="Left" Margin="0,14,0,0"><TextBlock Text="1100–1439" FontSize="8" Foreground="{StaticResource Text2}"/></Border>
+         </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="7,0,0,0">
+         <StackPanel>
+          <StackPanel Orientation="Horizontal"><Border Width="30" Height="30" CornerRadius="9" Background="{StaticResource GoldSoft}"><TextBlock Text="≡" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><StackPanel Margin="10,0,0,0"><TextBlock Text="NARROW" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Priority first" FontSize="13" FontWeight="SemiBold" Margin="0,2,0,0"/></StackPanel></StackPanel>
+          <TextBlock Text="Navigation collapses visually; primary content stays focused." FontSize="10" Foreground="{StaticResource Text2}" TextWrapping="Wrap" Margin="0,13,0,0"/>
+          <Border Background="{StaticResource Panel}" CornerRadius="8" Padding="8,5" HorizontalAlignment="Left" Margin="0,14,0,0"><TextBlock Text="1050–1099" FontSize="8" Foreground="{StaticResource Text2}"/></Border>
+         </StackPanel>
+        </Border>
+       </Grid>
+       <Border Grid.Row="2" Background="{StaticResource GoldSoft}" CornerRadius="12" Padding="14" Margin="0,15,0,0">
+        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <TextBlock Text="↔" FontSize="19" Foreground="{StaticResource Gold}" VerticalAlignment="Center"/>
+         <StackPanel Grid.Column="1" Margin="12,0,12,0" VerticalAlignment="Center"><TextBlock Text="RESPONSIVE PRIORITY" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Keep playback, search, and primary navigation visible before secondary decoration." FontSize="11" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/></StackPanel>
+         <Border Grid.Column="2" Background="{StaticResource Panel}" CornerRadius="8" Padding="9,6"><TextBlock Text="UI ONLY" FontSize="9" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border>
+        </Grid>
+       </Border>
+      </Grid>
+     </Border>
+
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
+      <Grid>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
        <StackPanel>
         <TextBlock Text="EMPTY STATES" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
         <TextBlock Text="Thoughtful empty experiences" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
