@@ -1493,6 +1493,75 @@
      <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
       <Grid>
        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <Grid>
+        <StackPanel>
+         <TextBlock Text="NAVIGATION POLISH" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+         <TextBlock Text="Clear navigation, at a glance" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+         <TextBlock Text="A refined navigation language for active pages, counts, playlists, and compact desktop states." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+        </StackPanel>
+        <Border Background="{StaticResource GoldSoft}" CornerRadius="9" Padding="9,5" HorizontalAlignment="Right" VerticalAlignment="Center"><TextBlock Text="NAV SYSTEM" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border>
+       </Grid>
+       <Grid Grid.Row="1" Margin="0,20,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="1.15*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="0.9*"/></Grid.ColumnDefinitions>
+        <Border Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="0,0,7,0">
+         <StackPanel>
+          <TextBlock Text="ACTIVE STATE" FontSize="8" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/>
+          <Border Background="{StaticResource GoldSoft}" BorderBrush="{StaticResource Gold}" BorderThickness="1" CornerRadius="10" Padding="11,9" Margin="0,10,0,0">
+           <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="30"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <TextBlock Text="⌂" FontSize="18" Foreground="{StaticResource Gold}" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Home" FontSize="12" FontWeight="SemiBold"/><TextBlock Text="Current page" FontSize="9" Foreground="{StaticResource Gold}" Margin="0,2,0,0"/></StackPanel>
+            <Border Grid.Column="2" Background="{StaticResource Gold}" CornerRadius="7" Padding="6,3"><TextBlock Text="ACTIVE" FontSize="7" Foreground="#15120C" FontWeight="Bold"/></Border>
+           </Grid>
+          </Border>
+          <Border Background="{StaticResource Panel}" CornerRadius="10" Padding="11,9" Margin="0,6,0,0">
+           <Grid><TextBlock Text="♫" FontSize="17" Foreground="{StaticResource Text2}" Width="30"/><TextBlock Text="Songs" FontSize="11" Foreground="{StaticResource Text2}" Margin="30,0,0,0" VerticalAlignment="Center"/></Grid>
+          </Border>
+         </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="7,0">
+         <StackPanel>
+          <TextBlock Text="BADGES &amp; COUNTS" FontSize="8" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/>
+          <Border Background="{StaticResource Panel}" CornerRadius="10" Padding="10,8" Margin="0,10,0,0">
+           <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="Queue" FontSize="11"/><Border Grid.Column="1" Background="{StaticResource GoldSoft}" CornerRadius="8" Padding="7,3"><TextBlock Text="6" FontSize="9" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border></Grid>
+          </Border>
+          <Border Background="{StaticResource Panel}" CornerRadius="10" Padding="10,8" Margin="0,6,0,0">
+           <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="Favorites" FontSize="11"/><Border Grid.Column="1" Background="{StaticResource GoldSoft}" CornerRadius="8" Padding="7,3"><TextBlock Text="48" FontSize="9" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border></Grid>
+          </Border>
+          <Border Background="{StaticResource Panel}" CornerRadius="10" Padding="10,8" Margin="0,6,0,0">
+           <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="Playlists" FontSize="11"/><TextBlock Grid.Column="1" Text="3" FontSize="9" Foreground="{StaticResource Text2}" VerticalAlignment="Center"/></Grid>
+          </Border>
+         </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="14" Padding="16" Margin="7,0,0,0">
+         <StackPanel>
+          <TextBlock Text="COMPACT SIDEBAR" FontSize="8" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/>
+          <Border Background="{StaticResource GoldSoft}" CornerRadius="10" Padding="9,9" Margin="0,10,0,0">
+           <StackPanel HorizontalAlignment="Center">
+            <Border Width="34" Height="34" CornerRadius="10" Background="{StaticResource Gold}"><TextBlock Text="⌂" FontSize="18" Foreground="#15120C" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+            <TextBlock Text="Home" FontSize="9" Foreground="{StaticResource Gold}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+           </StackPanel>
+          </Border>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,9,0,0">
+           <Border Width="28" Height="28" CornerRadius="8" Background="{StaticResource Panel}" Margin="3"><TextBlock Text="♫" Foreground="{StaticResource Text2}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+           <Border Width="28" Height="28" CornerRadius="8" Background="{StaticResource Panel}" Margin="3"><TextBlock Text="★" Foreground="{StaticResource Text2}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+           <Border Width="28" Height="28" CornerRadius="8" Background="{StaticResource Panel}" Margin="3"><TextBlock Text="⚙" Foreground="{StaticResource Text2}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          </StackPanel>
+         </StackPanel>
+        </Border>
+       </Grid>
+       <Border Grid.Row="2" Background="{StaticResource GoldSoft}" CornerRadius="12" Padding="14" Margin="0,15,0,0">
+        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <TextBlock Text="≡" FontSize="19" Foreground="{StaticResource Gold}" VerticalAlignment="Center"/>
+         <StackPanel Grid.Column="1" Margin="12,0,12,0" VerticalAlignment="Center"><TextBlock Text="NAVIGATION HIERARCHY" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Active page first, counts second, secondary navigation quieter and always readable." FontSize="11" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/></StackPanel>
+         <Border Grid.Column="2" Background="{StaticResource Panel}" CornerRadius="8" Padding="9,6"><TextBlock Text="UI ONLY" FontSize="9" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border>
+        </Grid>
+       </Border>
+      </Grid>
+     </Border>
+
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
+      <Grid>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
        <StackPanel>
         <TextBlock Text="EMPTY STATES" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
         <TextBlock Text="Thoughtful empty experiences" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
