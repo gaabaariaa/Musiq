@@ -1221,6 +1221,67 @@
       </Grid>
      </Border>
 
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
+      <Grid>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <Grid>
+        <StackPanel>
+         <TextBlock Text="CONTINUE LISTENING" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+         <TextBlock Text="Pick up where you left off." FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+         <TextBlock Text="Your recent listening is ready whenever you are." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+        </StackPanel>
+        <Button Style="{StaticResource Chip}" Content="See history" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+       </Grid>
+       <Grid Grid.Row="1" Margin="0,20,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="1.3*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Border Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="14" Margin="0,0,7,0">
+         <Grid>
+          <Grid.ColumnDefinitions><ColumnDefinition Width="76"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <Border Width="68" Height="68" CornerRadius="11" Background="{StaticResource GoldSoft}">
+           <Grid><TextBlock Text="♫" FontSize="28" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/><Border Background="{StaticResource Panel}" CornerRadius="6" Padding="5,3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"><TextBlock Text="72%" FontSize="7" Foreground="{StaticResource Gold}"/></Border></Grid>
+          </Border>
+          <StackPanel Grid.Column="1" Margin="12,0,8,0" VerticalAlignment="Center">
+           <TextBlock Text="Midnight Drive" FontSize="14" FontWeight="SemiBold"/>
+           <TextBlock Text="Neon Avenue · Night City" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+           <ProgressBar Height="3" Value="72" Maximum="100" Foreground="{StaticResource Gold}" Background="{StaticResource Hover}" Margin="0,9,0,0"/>
+          </StackPanel>
+          <Button Grid.Column="2" Style="{StaticResource RoundPlay}" Content="▶" Width="40" Height="40" VerticalAlignment="Center"/>
+         </Grid>
+        </Border>
+        <Border Grid.Column="1" Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="14" Margin="7,0">
+         <StackPanel>
+          <Border Width="54" Height="54" CornerRadius="11" Background="{StaticResource GoldSoft}"><TextBlock Text="☾" FontSize="24" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <TextBlock Text="Late Night" FontSize="14" FontWeight="SemiBold" Margin="0,11,0,0"/>
+          <TextBlock Text="22 tracks · 1h 28m" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/>
+          <TextBlock Text="Played yesterday" FontSize="9" Foreground="{StaticResource Muted}" Margin="0,7,0,0"/>
+         </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Style="{StaticResource SurfaceCard}" CornerRadius="14" Padding="14" Margin="7,0,0,0">
+         <StackPanel>
+          <Border Width="54" Height="54" CornerRadius="11" Background="{StaticResource GoldSoft}"><TextBlock Text="↺" FontSize="24" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <TextBlock Text="Recently Added" FontSize="14" FontWeight="SemiBold" Margin="0,11,0,0"/>
+          <TextBlock Text="36 tracks · 2h 18m" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,3,0,0"/>
+          <TextBlock Text="12 new this week" FontSize="9" Foreground="{StaticResource Muted}" Margin="0,7,0,0"/>
+         </StackPanel>
+        </Border>
+       </Grid>
+       <Border Grid.Row="2" Background="{StaticResource Soft}" CornerRadius="13" Padding="14" Margin="0,14,0,0">
+        <Grid>
+         <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <Border Width="38" Height="38" CornerRadius="10" Background="{StaticResource GoldSoft}"><TextBlock Text="✦" Foreground="{StaticResource Gold}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+         <StackPanel Grid.Column="1" Margin="12,0,15,0" VerticalAlignment="Center">
+          <TextBlock Text="RECOMMENDED FOR YOU" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/>
+          <TextBlock Text="Because you keep playing Neon Avenue" FontSize="12" FontWeight="SemiBold" Margin="0,3,0,0"/>
+         </StackPanel>
+         <StackPanel Grid.Column="2" Orientation="Horizontal">
+          <Border Background="{StaticResource Panel}" CornerRadius="9" Padding="9,6" Margin="0,0,6,0"><TextBlock Text="Blue Hour" FontSize="9" Foreground="{StaticResource Text2}"/></Border>
+          <Border Background="{StaticResource GoldSoft}" CornerRadius="9" Padding="9,6"><TextBlock Text="Play next" FontSize="9" Foreground="{StaticResource Gold}"/></Border>
+         </StackPanel>
+        </Grid>
+       </Border>
+      </Grid>
+     </Border>
+
   <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#17181D" BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0" Padding="20,11">
    <Grid>
     <Grid.ColumnDefinitions><ColumnDefinition Width="300"/><ColumnDefinition Width="*"/><ColumnDefinition Width="310"/></Grid.ColumnDefinitions>
