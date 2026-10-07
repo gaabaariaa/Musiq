@@ -863,6 +863,44 @@
    </ScrollViewer>
   </Grid>
 
+  <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Margin="32,0,32,18" Padding="24" VerticalAlignment="Center">
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="220"/><ColumnDefinition Width="*"/><ColumnDefinition Width="230"/></Grid.ColumnDefinitions>
+    <Border Width="190" Height="190" CornerRadius="16" Background="{StaticResource GoldSoft}">
+     <Grid>
+      <TextBlock Text="♫" FontSize="72" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+      <Border Background="#15161B" CornerRadius="9" Padding="8,5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12"><TextBlock Text="TRACK DETAILS" FontSize="8" FontWeight="Bold" Foreground="{StaticResource Gold}"/></Border>
+     </Grid>
+    </Border>
+    <StackPanel Grid.Column="1" Margin="24,0" VerticalAlignment="Center">
+     <TextBlock Text="SONG DETAILS" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+     <TextBlock Text="Midnight Drive" FontSize="30" FontWeight="SemiBold" Margin="0,7,0,0"/>
+     <TextBlock Text="Neon Avenue" FontSize="14" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+     <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+      <Border Background="{StaticResource GoldSoft}" CornerRadius="10" Padding="10,6" Margin="0,0,7,0"><TextBlock Text="Night City" Foreground="{StaticResource Gold}" FontSize="10"/></Border>
+      <Border Background="{StaticResource Soft}" CornerRadius="10" Padding="10,6" Margin="0,0,7,0"><TextBlock Text="2026" Foreground="{StaticResource Text2}" FontSize="10"/></Border>
+      <Border Background="{StaticResource Soft}" CornerRadius="10" Padding="10,6"><TextBlock Text="4:18" Foreground="{StaticResource Text2}" FontSize="10"/></Border>
+     </StackPanel>
+     <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+      <Button Style="{StaticResource RoundPlay}" Content="▶" Width="44" Height="44" Margin="0,0,8,0"/>
+      <Button Style="{StaticResource Icon}" Content="♡" Margin="0,0,4,0"/>
+      <Button Style="{StaticResource Icon}" Content="☷" Margin="0,0,4,0"/>
+      <Button Style="{StaticResource Icon}" Content="⌁"/>
+     </StackPanel>
+    </StackPanel>
+    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+     <TextBlock Text="ABOUT THIS TRACK" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/>
+     <TextBlock Text="Album" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,12,0,2"/>
+     <TextBlock Text="Night City" FontSize="13" FontWeight="SemiBold"/>
+     <TextBlock Text="Artist" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,12,0,2"/>
+     <TextBlock Text="Neon Avenue" FontSize="13" FontWeight="SemiBold"/>
+     <TextBlock Text="Genre" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,12,0,2"/>
+     <TextBlock Text="Electronic" FontSize="13" FontWeight="SemiBold"/>
+     <TextBlock Text="48 plays" FontSize="10" Foreground="{StaticResource Muted}" Margin="0,12,0,0"/>
+    </StackPanel>
+   </Grid>
+  </Border>
+
   <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="16" Margin="32,0,32,8" Padding="14,12" VerticalAlignment="Bottom">
    <Grid>
     <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
