@@ -1306,7 +1306,7 @@
      </StackPanel>
      <Button Grid.Column="2" Style="{StaticResource Icon}" Content="♡" Width="34" Height="34"/>
 
-     <Border Grid.Column="1" Grid.ColumnSpan="2 Background="{StaticResource GoldSoft}" Height="2" VerticalAlignment="Bottom" Margin="12,0,0,0" CornerRadius="1"/>
+     <Border Grid.Column="1" Grid.ColumnSpan="2" Background="{StaticResource GoldSoft}" Height="2" VerticalAlignment="Bottom" Margin="12,0,0,0" CornerRadius="1"/>
     </Grid>
 
     <Grid Grid.Column="1" Width="560" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -1325,7 +1325,7 @@
      </Grid>
     </Grid>
 
-    <StackPanel Grid.Column="2 Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
      <Button Style="{StaticResource Icon}" Content="⇄" ToolTip="Shuffle"/>
      <Button Style="{StaticResource Icon}" Content="↻" ToolTip="Repeat"/>
      <Border Background="{StaticResource Soft}" CornerRadius="10" Padding="8,5" Margin="3,0,5,0">
