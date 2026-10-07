@@ -167,6 +167,28 @@
       </Grid>
      </Border>
 
+     <Border Background="{StaticResource Panel}" CornerRadius="16" Padding="18" Margin="0,0,0,20">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <StackPanel>
+        <TextBlock Text="LIBRARY OVERVIEW" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+        <TextBlock Text="Everything in one place." FontSize="21" FontWeight="SemiBold" Margin="0,5,0,0"/>
+        <TextBlock Text="Your collection is organized and ready to explore." Foreground="{StaticResource Text2}" FontSize="11" Margin="0,4,0,0"/>
+       </StackPanel>
+       <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+        <Border Background="{StaticResource Soft}" CornerRadius="12" Padding="14,9" Margin="0,0,7,0">
+         <StackPanel><TextBlock Text="1,284" FontSize="17" FontWeight="SemiBold"/><TextBlock Text="Songs" FontSize="9" Foreground="{StaticResource Text2}"/></StackPanel>
+        </Border>
+        <Border Background="{StaticResource Soft}" CornerRadius="12" Padding="14,9" Margin="0,0,7,0">
+         <StackPanel><TextBlock Text="128" FontSize="17" FontWeight="SemiBold"/><TextBlock Text="Albums" FontSize="9" Foreground="{StaticResource Text2}"/></StackPanel>
+        </Border>
+        <Border Background="{StaticResource GoldSoft}" CornerRadius="12" Padding="14,9">
+         <StackPanel><TextBlock Text="64" FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource Gold}"/><TextBlock Text="Artists" FontSize="9" Foreground="{StaticResource Text2}"/></StackPanel>
+        </Border>
+       </StackPanel>
+      </Grid>
+     </Border>
+
      <Grid Margin="0,0,0,22">
       <Grid Margin="0,0,0,14">
        <StackPanel><TextBlock Text="DISCOVER" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/><TextBlock Text="Artists and albums" FontSize="22" FontWeight="SemiBold" Margin="0,5,0,0"/></StackPanel>
