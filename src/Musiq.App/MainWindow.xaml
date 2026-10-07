@@ -731,6 +731,22 @@
    </ScrollViewer>
   </Grid>
 
+  <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Soft}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="16" Margin="32,0,32,8" Padding="14,12" VerticalAlignment="Bottom">
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+     <Border Width="34" Height="34" CornerRadius="8" Background="{StaticResource GoldSoft}"><TextBlock Text="♫" Foreground="{StaticResource Gold}" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+     <StackPanel Margin="10,0,0,0"><TextBlock Text="Listening session" FontSize="11" FontWeight="SemiBold"/><TextBlock Text="12 songs · 48 min remaining" FontSize="9" Foreground="{StaticResource Text2}" Margin="0,2,0,0"/></StackPanel>
+    </StackPanel>
+    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+     <Border Background="{StaticResource GoldSoft}" CornerRadius="9" Padding="10,6" Margin="4,0"><TextBlock Text="Now playing" Foreground="{StaticResource Gold}" FontSize="10"/></Border>
+     <Border Background="{StaticResource Panel}" CornerRadius="9" Padding="10,6" Margin="4,0"><TextBlock Text="Queue · 6" Foreground="{StaticResource Text2}" FontSize="10"/></Border>
+     <Border Background="{StaticResource Panel}" CornerRadius="9" Padding="10,6" Margin="4,0"><TextBlock Text="Lyrics" Foreground="{StaticResource Text2}" FontSize="10"/></Border>
+    </StackPanel>
+    <Button Grid.Column="2" Style="{StaticResource Icon}" Content="×" Width="32" Height="32"/>
+   </Grid>
+  </Border>
+
   <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#17181D" BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0" Padding="20,11">
    <Grid>
     <Grid.ColumnDefinitions><ColumnDefinition Width="300"/><ColumnDefinition Width="*"/><ColumnDefinition Width="310"/></Grid.ColumnDefinitions>
