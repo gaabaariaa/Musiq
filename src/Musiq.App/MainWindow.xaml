@@ -1174,6 +1174,53 @@
       </Grid>
      </Border>
 
+     <Border Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Padding="22" Margin="0,0,0,22">
+      <Grid>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <Grid>
+        <StackPanel>
+         <TextBlock Text="PLAYLIST WORKSPACE" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+         <TextBlock Text="Favorites Mix" FontSize="27" FontWeight="SemiBold" Margin="0,5,0,0"/>
+         <TextBlock Text="A focused space for building, reviewing, and refining your playlist." FontSize="12" Foreground="{StaticResource Text2}" Margin="0,4,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+         <Button Style="{StaticResource Chip}" Content="Share"/>
+         <Button Style="{StaticResource Chip}" Content="More"/>
+         <Button Style="{StaticResource RoundPlay}" Content="▶" Width="42" Height="42"/>
+        </StackPanel>
+       </Grid>
+       <Grid Grid.Row="1" Margin="0,20,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="1.35*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Border Background="{StaticResource GoldSoft}" CornerRadius="13" Padding="15" Margin="0,0,7,0">
+         <StackPanel><TextBlock Text="TRACKS" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="48" FontSize="25" FontWeight="SemiBold" Margin="0,5,0,0"/><TextBlock Text="songs in playlist" FontSize="10" Foreground="{StaticResource Text2}"/></StackPanel>
+        </Border>
+        <Border Grid.Column="1" Background="{StaticResource Soft}" CornerRadius="13" Padding="15" Margin="7,0">
+         <StackPanel><TextBlock Text="DURATION" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="3h 12m" FontSize="21" FontWeight="SemiBold" Margin="0,7,0,0"/><TextBlock Text="total listening time" FontSize="10" Foreground="{StaticResource Text2}"/></StackPanel>
+        </Border>
+        <Border Grid.Column="2" Background="{StaticResource Soft}" CornerRadius="13" Padding="15" Margin="7,0">
+         <StackPanel><TextBlock Text="UPDATED" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Today" FontSize="21" FontWeight="SemiBold" Margin="0,7,0,0"/><TextBlock Text="latest playlist change" FontSize="10" Foreground="{StaticResource Text2}"/></StackPanel>
+        </Border>
+        <Border Grid.Column="3" Background="{StaticResource Soft}" CornerRadius="13" Padding="15" Margin="7,0,0,0">
+         <StackPanel><TextBlock Text="SOURCE" FontSize="9" Foreground="{StaticResource Muted}" FontWeight="SemiBold"/><TextBlock Text="Your library" FontSize="17" FontWeight="SemiBold" Margin="0,8,0,0"/><TextBlock Text="personal collection" FontSize="10" Foreground="{StaticResource Text2}"/></StackPanel>
+        </Border>
+       </Grid>
+       <Border Grid.Row="2" Background="{StaticResource Soft}" CornerRadius="12" Padding="12" Margin="0,15,0,0">
+        <Grid>
+         <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock Text="TRACKLIST" FontSize="9" Foreground="{StaticResource Gold}" FontWeight="SemiBold" Margin="0,0,14,0"/>
+          <Border Background="{StaticResource Panel}" CornerRadius="9" Padding="10,6" Margin="0,0,6,0"><TextBlock Text="All tracks" FontSize="10" Foreground="{StaticResource Text2}"/></Border>
+          <Border Background="{StaticResource Panel}" CornerRadius="9" Padding="10,6"><TextBlock Text="Recently added" FontSize="10" Foreground="{StaticResource Text2}"/></Border>
+         </StackPanel>
+         <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <Button Style="{StaticResource Chip}" Content="Reorder"/>
+          <Button Style="{StaticResource Chip}" Content="+ Add songs"/>
+         </StackPanel>
+        </Grid>
+       </Border>
+      </Grid>
+     </Border>
+
   <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#17181D" BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0" Padding="20,11">
    <Grid>
     <Grid.ColumnDefinitions><ColumnDefinition Width="300"/><ColumnDefinition Width="*"/><ColumnDefinition Width="310"/></Grid.ColumnDefinitions>
