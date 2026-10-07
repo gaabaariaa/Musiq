@@ -901,6 +901,62 @@
    </Grid>
   </Border>
 
+  <Border Grid.Row="0" Grid.Column="1" Background="#0B0C10" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="22" Margin="32,0,32,18" Padding="30" VerticalAlignment="Center">
+   <Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <Grid>
+     <TextBlock Text="NOW PLAYING" FontSize="10" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/>
+     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+      <Button Style="{StaticResource Chip}" Content="Lyrics"/>
+      <Button Style="{StaticResource Chip}" Content="Queue"/>
+      <Button Style="{StaticResource Icon}" Content="×" Width="32" Height="32"/>
+     </StackPanel>
+    </Grid>
+    <Grid Grid.Row="1" Margin="0,28,0,22">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="1.05*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+     <Border Width="300" Height="300" CornerRadius="24" Background="{StaticResource GoldSoft}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{StaticResource Line}" BorderThickness="1">
+      <Grid>
+       <Ellipse Width="226" Height="226" Stroke="{StaticResource Gold}" StrokeThickness="1" Opacity=".35" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+       <Ellipse Width="174" Height="174" Stroke="{StaticResource Gold}" StrokeThickness="1" Opacity=".22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+       <TextBlock Text="♫" FontSize="92" Foreground="{StaticResource Gold}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+       <Border Background="#111217" CornerRadius="9" Padding="9,5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18"><TextBlock Text="NIGHT CITY" FontSize="8" Foreground="{StaticResource Gold}" FontWeight="SemiBold"/></Border>
+      </Grid>
+     </Border>
+     <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="30,0,10,0">
+      <TextBlock Text="Midnight Drive" FontSize="34" FontWeight="SemiBold"/>
+      <TextBlock Text="Neon Avenue" FontSize="15" Foreground="{StaticResource Text2}" Margin="0,6,0,0"/>
+      <TextBlock Text="Night City · 2026 · Electronic" FontSize="11" Foreground="{StaticResource Muted}" Margin="0,4,0,0"/>
+      <Grid Margin="0,28,0,0">
+       <ProgressBar Height="5" Value="42" Maximum="100" Foreground="{StaticResource Gold}" Background="{StaticResource Hover}"/>
+       <TextBlock Text="1:42" FontSize="10" Foreground="{StaticResource Text2}" Margin="0,11,0,0"/>
+       <TextBlock Text="4:18" FontSize="10" Foreground="{StaticResource Text2}" HorizontalAlignment="Right" Margin="0,11,0,0"/>
+      </Grid>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,28,0,0">
+       <Button Style="{StaticResource Icon}" Content="↶" Width="44" Height="44"/>
+       <Button Style="{StaticResource Icon}" Content="◀" Width="44" Height="44" Margin="10,0"/>
+       <Button Style="{StaticResource RoundPlay}" Content="▶" Width="62" Height="62" Margin="8,0"/>
+       <Button Style="{StaticResource Icon}" Content="▶" Width="44" Height="44" Margin="10,0"/>
+       <Button Style="{StaticResource Icon}" Content="↷" Width="44" Height="44"/>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,18,0,0">
+       <Button Style="{StaticResource Chip}" Content="♡ Favorite"/>
+       <Button Style="{StaticResource Chip}" Content="＋ Add to queue"/>
+       <Button Style="{StaticResource Chip}" Content="⌁ Lyrics"/>
+      </StackPanel>
+     </StackPanel>
+    </Grid>
+    <Grid Grid.Row="2">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <StackPanel Orientation="Horizontal">
+      <Border Background="{StaticResource Soft}" CornerRadius="10" Padding="10,7" Margin="0,0,7,0"><TextBlock Text="Electronic" Foreground="{StaticResource Text2}" FontSize="10"/></Border>
+      <Border Background="{StaticResource Soft}" CornerRadius="10" Padding="10,7" Margin="0,0,7,0"><TextBlock Text="48 plays" Foreground="{StaticResource Text2}" FontSize="10"/></Border>
+      <Border Background="{StaticResource GoldSoft}" CornerRadius="10" Padding="10,7"><TextBlock Text="Favorite" Foreground="{StaticResource Gold}" FontSize="10"/></Border>
+     </StackPanel>
+     <TextBlock Grid.Column="1" Text="Next · Blue Hour" Foreground="{StaticResource Text2}" FontSize="10" VerticalAlignment="Center"/>
+    </Grid>
+   </Grid>
+  </Border>
+
   <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="18" Margin="32,0,32,18" Padding="22" VerticalAlignment="Center">
    <Grid>
     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
